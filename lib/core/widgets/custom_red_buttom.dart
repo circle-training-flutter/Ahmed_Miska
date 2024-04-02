@@ -6,9 +6,12 @@ import '../theming/colors.dart';
 class CustomRedButtom extends StatelessWidget {
   final Function() onTap;
   final Widget child;
+  final double? width;
   const CustomRedButtom({
-    super.key, required this.onTap, required this.child,
-   
+    super.key,
+    required this.onTap,
+    required this.child,
+    this.width,
   });
 
   @override
@@ -16,6 +19,7 @@ class CustomRedButtom extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: width,
         decoration: BoxDecoration(
           color: ColorManger.red,
           borderRadius: BorderRadius.circular(12.r),
@@ -23,7 +27,7 @@ class CustomRedButtom extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 24.w,
-            vertical: 12.h,
+            vertical: 16.h,
           ),
           child: child,
         ),
@@ -31,4 +35,3 @@ class CustomRedButtom extends StatelessWidget {
     );
   }
 }
-

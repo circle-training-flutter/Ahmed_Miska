@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyOrdersScreen extends StatelessWidget {
-  const MyOrdersScreen({Key? key}) : super(key: key);
+  final bool check;
+  const MyOrdersScreen({Key? key, required this.check}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class MyOrdersScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const AppBarOfReturnedScreens(title: 'my_orders'),
+            AppBarOfReturnedScreens(title: 'my_orders', check: check),
             verticalSpace(24),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),

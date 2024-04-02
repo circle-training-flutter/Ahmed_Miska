@@ -1,17 +1,17 @@
 import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
-import 'package:circletraning/core/theming/styles.dart';
 import 'package:circletraning/features/details_order/ui/widgets/row_of_note_of_the_order.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theming/colors.dart';
+import 'column_of_id_and_date.dart';
 
 class NotesOfTheOrder extends StatelessWidget {
+  final bool? check;
   const NotesOfTheOrder({
     super.key,
+    this.check,
   });
 
   @override
@@ -26,52 +26,9 @@ class NotesOfTheOrder extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  height: 20.h,
-                  width: 20.w,
-                  child: SvgPicture.asset(AppIcons.idIcon),
-                ),
-                horizontalSpace(8),
-                Text(
-                  'num',
-                  style: TextStyles.font18MadaSemiBoldBlack.copyWith(
-                    color: ColorManger.red,
-                  ),
-                ).tr()
-              ],
-            ),
-            verticalSpace(20),
-            Row(
-              children: [
-                SizedBox(
-                  height: 20.h,
-                  width: 20.w,
-                  child: SvgPicture.asset(AppIcons.calenderRedIcon),
-                ),
-                horizontalSpace(8),
-                Row(
-                  children: [
-                    Text(
-                      'date',
-                      style: TextStyles.font14MadaRegularBlack,
-                    ).tr(),
-                    horizontalSpace(8),
-                    Text(
-                      '-',
-                      style: TextStyles.font14MadaRegularBlack,
-                    ),
-                    horizontalSpace(8),
-                    Text(
-                      'time',
-                      style: TextStyles.font14MadaRegularBlack,
-                    ).tr(),
-                  ],
-                ),
-              ],
-            ),
-            verticalSpace(20),
+            check == true
+                ? const ColumnOfIdAndDateOfTheNotesOfOrder()
+                : verticalSpace(1),
             RowOfNoteOfTheOrder(
               icon: AppIcons.restBranchIcon,
               title: 'branch',

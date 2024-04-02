@@ -1,6 +1,6 @@
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../helpers/consatants.dart';
 import '../theming/colors.dart';
@@ -31,10 +31,11 @@ class _HeartIconState extends State<HeartIcon> {
         ),
         child: Padding(
           padding: EdgeInsets.all(8.0.r),
-          child: SvgPicture.asset(
+          child: SVGIcon(
             AppIcons.heartIcon,
-            color: checked ? ColorManger.red : null,
             height: 16.h,
+            width: 16.w,
+            color: checked ? ColorManger.red : null,
           ),
         ),
       ),

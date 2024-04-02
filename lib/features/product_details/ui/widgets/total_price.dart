@@ -7,12 +7,14 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/custom_red_buttom.dart';
 
 class TotalPrice extends StatelessWidget {
+  final int price;
   final Widget buttom;
   final Function() onTap;
   const TotalPrice({
     super.key,
     required this.buttom,
     required this.onTap,
+    required this.price,
   });
 
   @override
@@ -40,7 +42,7 @@ class TotalPrice extends StatelessWidget {
             ).tr(),
             horizontalSpace(4),
             Text(
-              'price',
+              price.toString(),
               style: TextStyles.font18MadaSemiBoldBlack,
             ).tr(),
             horizontalSpace(4),

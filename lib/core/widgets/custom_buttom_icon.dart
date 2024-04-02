@@ -1,6 +1,5 @@
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CustomButtomIcon extends StatelessWidget {
   final String icon;
@@ -9,17 +8,9 @@ class CustomButtomIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        height: 24.h,
-        width: 24.w,
-        child: SvgPicture.asset(
-          icon,
-          fit: BoxFit.contain,
-        ),
-      ),
+      child: SVGIcon(icon),
     );
   }
 }

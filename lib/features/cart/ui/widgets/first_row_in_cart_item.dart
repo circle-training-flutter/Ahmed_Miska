@@ -1,16 +1,22 @@
-
+import 'package:circletraning/core/widgets/cached_network_image.dart';
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../data/models/response/product_model/product_datum.dart';
 
 class FirstRowInCartItem extends StatelessWidget {
+  final ProductModelItem product;
+  final Function()? onTap;
+
   const FirstRowInCartItem({
     super.key,
+    this.onTap,
+    required this.product,
   });
 
   @override
@@ -21,30 +27,35 @@ class FirstRowInCartItem extends StatelessWidget {
         SizedBox(
           height: 66.67.h,
           width: 100.w,
-          child: Image.asset(Assets.pic3),
+          child: CachedImage(
+            image: product.image!,
+          ),
         ),
         horizontalSpace(12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'salmon',
-              style: TextStyles.font14MadaRegularBlack,
-            ).tr(),
+            SizedBox(
+              width: 180.w,
+              child: Text(
+                product.title!,
+                style: TextStyles.font14MadaRegularBlack,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ).tr(),
+            ),
             Row(
               children: [
-                SvgPicture.asset(AppIcons.priceIcon),
+                SVGIcon(AppIcons.priceIcon),
                 horizontalSpace(4),
                 Text(
-                  'price',
-                  style: TextStyles
-                      .font16MadaSemiBoldBlack,
+                  product.price.toString(),
+                  style: TextStyles.font16MadaSemiBoldBlack,
                 ).tr(),
                 horizontalSpace(4),
                 Text(
                   'egp',
-                  style:
-                      TextStyles.font12MadaRegularBlack,
+                  style: TextStyles.font12MadaRegularBlack,
                 ).tr(),
               ],
             ),
@@ -52,12 +63,10 @@ class FirstRowInCartItem extends StatelessWidget {
         ),
         const Spacer(),
         Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: 10.w, vertical: 10.h),
-          child: SizedBox(
-            height: 20.h,
-            width: 20.w,
-            child: SvgPicture.asset(
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          child: GestureDetector(
+            onTap: onTap,
+            child: SVGIcon(
               AppIcons.deleteIcon,
             ),
           ),

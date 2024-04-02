@@ -15,25 +15,29 @@ class SearchBaar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: double.infinity,
+        // height: double.infinity,
+
         decoration: BoxDecoration(
           color: ColorManger.grayLight,
           borderRadius: BorderRadius.circular(16.r),
         ),
-        child: Row(
-          children: [
-            horizontalSpace(9),
-            Icon(
-              Icons.search,
-              color: ColorManger.red,
-              size: 20.sp,
-            ),
-            horizontalSpace(8),
-            Text(
-              'search',
-              style: TextStyles.font12MadaRegularGray,
-            ).tr(),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.7.h, horizontal: 9.w),
+          child: Row(
+            children: [
+              horizontalSpace(9),
+              Icon(
+                Icons.search,
+                color: ColorManger.red,
+                size: 20.sp,
+              ),
+              horizontalSpace(8),
+              Text(
+                'search',
+                style: TextStyles.font12MadaRegularGray,
+              ).tr(),
+            ],
+          ),
         ),
       ),
     );

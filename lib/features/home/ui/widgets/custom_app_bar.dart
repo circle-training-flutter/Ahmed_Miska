@@ -2,11 +2,15 @@ import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/extentions.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
 import 'package:circletraning/core/theming/styles.dart';
+import 'package:circletraning/core/widgets/svg_icon.dart';
+import 'package:circletraning/data/providers/shared_prefrance_provider.dart';
+import 'package:circletraning/data/providers/slider_image_provider.dart';
 import 'package:circletraning/features/cart/ui/cart_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import '../../../notification/ui/notification_screen.dart';
 import 'app_bar_icon.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -15,13 +19,13 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 72.h,
+      // height: 72.h,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         child: Row(
           children: [
-            SvgPicture.asset(Assets.logo, height: 22.h, width: 32.w),
+            SVGIcon(Assets.logo, height: 22.h, width: 32.w),
             horizontalSpace(8),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,13 +36,34 @@ class CustomAppBar extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            const AppBarIcon(icon: Icons.notifications),
+            Consumer<SliderImageProvider>(
+              builder: (context, provider, child) {
+                return GestureDetector(
+                  onTap: () {
+                    push(const NotificationScreen());
+                  },
+                  child: AppBarIcon(
+                    icon: AppIcons.notificationIcon,
+                    check: provider.notificationCount != 0 ? true : false,
+                  ),
+                );
+              },
+            ),
             horizontalSpace(8),
-            GestureDetector(
-                onTap: () {
-                  push(const CartScreen());
-                },
-                child: const AppBarIcon(icon: Icons.shopping_cart)),
+            Consumer<SharedPref>(
+              builder: (context, provider, child) {
+                return GestureDetector(
+                  onTap: () {
+                    push(const CartScreen());
+                  },
+                  child: AppBarIcon(
+                    icon: AppIcons.cartIcon,
+                    check: provider.cartItems.isEmpty ? false : true,
+                    number: provider.totalquantity().toInt(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

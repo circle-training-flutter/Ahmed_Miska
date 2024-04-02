@@ -1,7 +1,7 @@
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
@@ -26,7 +26,7 @@ class TrackOrder extends StatelessWidget {
         Row(
           children: [
             Container(
-              height: 48.h,
+              height: 48.w,
               width: 48.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
@@ -37,7 +37,7 @@ class TrackOrder extends StatelessWidget {
                   horizontal: 12.w,
                   vertical: 12.h,
                 ),
-                child: SvgPicture.asset(icon),
+                child: SVGIcon(icon),
               ),
             ),
             horizontalSpace(8),

@@ -1,14 +1,37 @@
+import 'package:circletraning/core/helpers/spacing.dart';
+import 'package:circletraning/core/widgets/search_bar.dart';
+import 'package:circletraning/data/providers/category_provider.dart';
 import 'package:circletraning/features/product/ui/widgets/categorys_gridview_in_product_screen.dart';
+import 'package:circletraning/features/product/ui/widgets/listview_of_products_in_products_screen.dart';
 import 'package:circletraning/features/product/ui/widgets/products_gridview_in_product_screen.dart';
 import 'package:circletraning/features/product/ui/widgets/row_of_prouducts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/helpers/spacing.dart';
-import '../../../core/widgets/search_bar.dart';
-import '../../home/ui/widgets/product_gridview_item.dart';
+import 'package:provider/provider.dart';
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+class ProductsScreen extends StatefulWidget {
+  final int? index;
+
+  const ProductsScreen({Key? key, this.index}) : super(key: key);
+
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
+  int selectedProductId = 0;
+  int subcatId = 0;
+
+  @override
+  void didChangeDependencies() {
+    selectedProductId = Provider.of<CategoryProvider>(context).categoryModelList[widget.index!].id!;
+    subcatId = Provider.of<CategoryProvider>(context)
+        .categoryModelList[widget.index!]
+        .subCategories![Provider.of<CategoryProvider>(context).categoryModelList[widget.index!].subCategories!.length - 1]
+        .id!;
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,33 +58,35 @@ class ProductsScreen extends StatelessWidget {
                             ),
                           ),
                           verticalSpace(8),
-                          const CategorysGridViewInProductScreen(),
+                          CategorysGridViewInProductScreen(
+                            index: widget.index!,
+                            onProductSelected: (int productId, int subcatIdd) {
+                              setState(
+                                () {
+                                  selectedProductId = productId;
+                                  subcatId = subcatIdd;
+                                },
+                              );
+                            },
+                          ),
                           verticalSpace(8),
-                          const ProductsGridViewInProductScreen()
+                          ProductsGridViewInProductScreen(
+                            id: selectedProductId,
+                            onProductSelected: (int productId) {
+                              setState(
+                                () {
+                                  subcatId = productId;
+                                },
+                              );
+                            },
+                          )
                         ],
                       ),
                     ),
                     verticalSpace(16),
-                    SizedBox(
-                      // height: (191.33.h + 12.h) * ceil(5, 2),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 5,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 167.5.w / 191.33.h,
-                            crossAxisSpacing: 8.w,
-                            mainAxisSpacing: 12.h,
-                          ),
-                          itemBuilder: (context, index) {
-                            return const ProductGridviewItem();
-                          },
-                        ),
-                      ),
+                    ListViewOfProductinProductScreen(
+                      catId: selectedProductId,
+                      subCatId: subcatId,
                     )
                   ],
                 ),

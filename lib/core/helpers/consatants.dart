@@ -3,7 +3,12 @@ class Assets {
   static String pic1 = 'assets/images/pic1.png';
   static String pic2 = 'assets/images/pic2.png';
   static String pic3 = 'assets/images/pic3.png';
+  static String pic4 = 'assets/images/pic4.png';
+  static String pic5 = 'assets/images/pic5.png';
+
   static String profile = 'assets/images/profile.png';
+  static String doneGIF = 'assets/images/done_gif.gif';
+  static String pointsGIF = 'assets/images/points_gif.gif';
 }
 
 class AppIcons {
@@ -51,4 +56,22 @@ class AppIcons {
   static String calenderRedIcon = 'assets/icons/calender_red_icon.svg';
   static String notesIcon = 'assets/icons/notes_icon.svg';
   static String payIcon = 'assets/icons/pay_icon.svg';
+  static String closeIcon = 'assets/icons/close_icon.svg';
+  static String cashIcon = 'assets/icons/cash_icon.svg';
+  static String logoAndNameIcon = 'assets/icons/logo_and_name.svg';
+  static String aboutRecIcon = 'assets/icons/about_rect.svg';
+  static String connectUsIcon = 'assets/icons/connect_us_icon.svg';
+  static String noteTitleIcon = 'assets/icons/note_title_icon.svg';
+  static String emailIcon = 'assets/icons/email_icon.svg';
+  static String nameIcon = 'assets/icons/name_icon.svg';
+  static String flagIcon = 'assets/icons/flag_icon.svg';
+  static String phoneIcon = 'assets/icons/phone_icon.svg';
+  static String logoIconGray = 'assets/icons/logo_icon_gray.svg';
+  static String otp = 'assets/icons/otp.svg';
+  static String selectPhoto = 'assets/icons/select_photo.svg';
+  static String addPhoto = 'assets/icons/add_photo.svg';
+  static String mainLogoIconGray = 'assets/icons/main_logo_icon_gray.svg';
+  static String cityIcon = 'assets/icons/city_icon.svg';
+  static String cartIcon = 'assets/icons/cart_icon.svg';
+  static String notificationIcon = 'assets/icons/notification_icon.svg';
 }

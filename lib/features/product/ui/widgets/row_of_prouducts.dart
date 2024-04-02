@@ -1,7 +1,8 @@
+import 'package:circletraning/core/widgets/svg_icon.dart';
+import 'package:circletraning/features/main_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/helpers/extentions.dart';
@@ -10,9 +11,11 @@ import '../../../../core/theming/styles.dart';
 
 class AppBarOfReturnedScreens extends StatelessWidget {
   final String title;
+  final bool? check;
   const AppBarOfReturnedScreens({
     super.key,
     required this.title,
+    this.check,
   });
 
   @override
@@ -26,9 +29,9 @@ class AppBarOfReturnedScreens extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                pop();
+                check == true ? pushAndRemoveUntil(const MainScreen()) : pop();
               },
-              child: SvgPicture.asset(
+              child: SVGIcon(
                 AppIcons.arrowBackIcon,
                 height: 14.4.h,
                 width: 19.8.w,

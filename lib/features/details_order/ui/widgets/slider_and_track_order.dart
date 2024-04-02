@@ -1,8 +1,10 @@
 import 'package:circletraning/core/helpers/consatants.dart';
+import 'package:circletraning/core/helpers/extentions.dart';
 import 'package:circletraning/features/details_order/ui/widgets/number_and_call_delivery_container.dart';
 import 'package:circletraning/features/details_order/ui/widgets/row_of_cancel_and_edit_order.dart';
 import 'package:circletraning/features/details_order/ui/widgets/the_order_receved.dart';
 import 'package:circletraning/features/details_order/ui/widgets/track_order.dart';
+import 'package:circletraning/features/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class SliderAndTrackOrder extends StatefulWidget {
@@ -59,6 +61,8 @@ class _SliderAndTrackOrderState extends State<SliderAndTrackOrder> {
             setState(() {
               index++;
             });
+          } else {
+            pushAndRemoveUntil(const MainScreen());
           }
         },
         child: children[index]);

@@ -37,7 +37,7 @@ class SettingScreen extends StatelessWidget {
                     verticalSpace(16),
                     const SettingsWidget(),
                     verticalSpace(16),
-                    const LogOutButton()
+                    const LogOutAndLoginButton(text: 'login')
                   ],
                 ),
               ),

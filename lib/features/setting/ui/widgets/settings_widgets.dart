@@ -1,12 +1,18 @@
 import 'package:circletraning/core/helpers/consatants.dart';
+import 'package:circletraning/core/helpers/extentions.dart';
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:circletraning/features/setting/ui/widgets/row_of_set_settings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../core/helpers/functions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../about_app/ui/about_app_screen.dart';
+import '../../../contact_us/ui/contact_us_screen.dart';
+import '../../../create_and_edit_account/ui/create_and_edit_account.dart';
+import 'chose_language_buttom_sheet.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({
@@ -37,21 +43,33 @@ class SettingsWidget extends StatelessWidget {
               ).tr(),
             ),
             RowOfSetSettings(
+              onTap: () {
+                push(const CreateAndEditAccount(isEdit: false));
+              },
               text: 'modify_my_account',
               icon: AppIcons.editProfileIcon,
             ),
             verticalSpace(16),
             RowOfSetSettings(
+              onTap: () {
+                displayBottomSheet(context, const ChoseLanguageButtomSheet());
+              },
               text: 'language',
               icon: AppIcons.languageIcon,
             ),
             verticalSpace(16),
             RowOfSetSettings(
+              onTap: () {
+                push(const ContactUsScreen());
+              },
               text: 'connect_us',
               icon: AppIcons.contactUsIcon,
             ),
             verticalSpace(16),
             RowOfSetSettings(
+              onTap: () {
+                push(const AboutAppScreen());
+              },
               text: 'about_this_app',
               icon: AppIcons.aboutAppIcon,
             ),
@@ -69,10 +87,10 @@ class SettingsWidget extends StatelessWidget {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-                    child: SizedBox(
+                    child: SVGIcon(
+                      AppIcons.deleteAccountIcon,
                       height: 24.h,
                       width: 24.w,
-                      child: SvgPicture.asset(AppIcons.deleteAccountIcon),
                     ),
                   ),
                   Text(

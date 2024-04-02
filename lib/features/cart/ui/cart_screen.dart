@@ -5,37 +5,59 @@ import 'package:circletraning/features/pay_and_delevary/ui/pay_and_delevary_scre
 import 'package:circletraning/features/product/ui/widgets/row_of_prouducts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../data/providers/shared_prefrance_provider.dart';
 import '../../product_details/ui/widgets/total_price.dart';
 
-class CartScreen extends StatelessWidget {
+// GetIt getIt = GetIt.instance;
+class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const AppBarOfReturnedScreens(title: 'basket'),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 5,
+        child: Consumer<SharedPref>(builder: (context, sharedPref, child) {
+          return Column(
+            children: [
+              const AppBarOfReturnedScreens(
+                title: 'basket',
+                check: true,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: sharedPref.cartItems.length,
                   itemBuilder: (context, index) {
-                    return const CartItem();
-                  }),
-            ),
-            TotalPrice(
-              buttom: Text(
-                'order_now',
-                style: TextStyles.font14MadaRegularWith,
-              ).tr(),
-              onTap: () {
-                push(const PayAndDelevaryScreen());
-              },
-            ),
-          ],
-        ),
+                    return CartItem(
+                      onTap: () {
+                        sharedPref.removeFromCart(sharedPref.cartItems[index]);
+                      },
+                      product: sharedPref.cartItems[index],
+                    );
+                  },
+                ),
+              ),
+              TotalPrice(
+                buttom: Text(
+                  'order_now',
+                  style: TextStyles.font14MadaRegularWith,
+                ).tr(),
+                onTap: () {
+                  push(PayAndDelevaryScreen(
+                    price: sharedPref.totalPrice().toInt(),
+                  ));
+                },
+                price: sharedPref.totalPrice().toInt(),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

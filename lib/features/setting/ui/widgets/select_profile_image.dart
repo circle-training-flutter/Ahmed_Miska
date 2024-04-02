@@ -1,6 +1,6 @@
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/theming/colors.dart';
@@ -45,10 +45,7 @@ class SelectProfileImage extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 8.w),
-              child: SvgPicture.asset(
-                AppIcons.editProfileIcon,
-                fit: BoxFit.fill,
-              ),
+              child: SVGIcon(AppIcons.editProfileIcon),
             ),
           ),
         ),

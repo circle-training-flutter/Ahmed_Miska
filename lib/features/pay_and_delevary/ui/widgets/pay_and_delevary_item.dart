@@ -1,30 +1,35 @@
-import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
+import 'package:circletraning/core/widgets/cached_network_image.dart';
 import 'package:circletraning/core/theming/colors.dart';
 import 'package:circletraning/core/theming/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../data/models/response/product_model/product_datum.dart';
+
 class PayAndDelevaryItem extends StatelessWidget {
-  const PayAndDelevaryItem({Key? key}) : super(key: key);
+  final ProductModelItem product;
+
+  const PayAndDelevaryItem({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
-          height: 48.h,
-          width: 72.w,
-          child: Image.asset(Assets.pic3),
-        ),
+            height: 48.h,
+            width: 72.w,
+            child: CachedImage(
+              image: product.image!,
+            )),
         horizontalSpace(12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'salmon',
+                product.title!,
                 style: TextStyles.font14MadaRegularBlack,
               ).tr(),
               verticalSpace(8),
@@ -36,7 +41,7 @@ class PayAndDelevaryItem extends StatelessWidget {
                   ),
                   horizontalSpace(4),
                   Text(
-                    '2',
+                    product.weightUnit.toString(),
                     style: TextStyles.font14MadaRegularBlack
                         .copyWith(color: ColorManger.red),
                   ),
@@ -47,7 +52,7 @@ class PayAndDelevaryItem extends StatelessWidget {
                   ).tr(),
                   horizontalSpace(4),
                   Text(
-                    'price',
+                    '${product.price! * product.weightUnit!}',
                     style: TextStyles.font18MadaSemiBoldBlack
                         .copyWith(color: ColorManger.red),
                   ).tr(),

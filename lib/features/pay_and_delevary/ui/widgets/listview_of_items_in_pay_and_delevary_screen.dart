@@ -1,11 +1,12 @@
-
 import 'package:circletraning/features/pay_and_delevary/ui/widgets/pay_and_delevary_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../data/providers/shared_prefrance_provider.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
-import 'dashed_divider.dart';
+import '../../../../core/widgets/dashed_divider.dart';
 
 class ListviewOfItemsInPayAndDelevaryScreen extends StatelessWidget {
   const ListviewOfItemsInPayAndDelevaryScreen({
@@ -25,23 +26,27 @@ class ListviewOfItemsInPayAndDelevaryScreen extends StatelessWidget {
           horizontal: 12.w,
           vertical: 4.h,
         ),
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                verticalSpace(12),
-                const PayAndDelevaryItem(),
-                verticalSpace(12),
-                index != 1
-                    ? const MySeparator()
-                    : const SizedBox(),
-              ],
-            );
-          },
-        ),
+        child: Consumer<SharedPref>(builder: (context, sharedPref, child) {
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: sharedPref.cartItems.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  verticalSpace(12),
+                  PayAndDelevaryItem(
+                    product: sharedPref.cartItems[index],
+                  ),
+                  verticalSpace(12),
+                  index != sharedPref.cartItems.length - 1
+                      ? MySeparator(color: ColorManger.red.withOpacity(.3))
+                      : const SizedBox(),
+                ],
+              );
+            },
+          );
+        }),
       ),
     );
   }

@@ -2,10 +2,10 @@ import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
 import 'package:circletraning/core/theming/colors.dart';
 import 'package:circletraning/core/theming/styles.dart';
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NumberAndCallDeliveryContainer extends StatelessWidget {
   const NumberAndCallDeliveryContainer({
@@ -23,7 +23,7 @@ class NumberAndCallDeliveryContainer extends StatelessWidget {
           children: [
             Container(
               height: 48.h,
-              width: 48.w,
+              width: 48.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 image: DecorationImage(
@@ -53,11 +53,7 @@ class NumberAndCallDeliveryContainer extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            SizedBox(
-              height: 24.h,
-              width: 24.w,
-              child: SvgPicture.asset(AppIcons.callIcon),
-            )
+            SVGIcon(AppIcons.callIcon)
           ],
         ),
       ),

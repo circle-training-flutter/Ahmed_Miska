@@ -1,8 +1,7 @@
-
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/helpers/spacing.dart';
@@ -18,13 +17,11 @@ class AddressRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        SVGIcon(
+          AppIcons.pinIcon,
           height: 21.h,
           width: 21.w,
-          child: SvgPicture.asset(
-            AppIcons.pinIcon,
-            color: ColorManger.black,
-          ),
+          color: ColorManger.black,
         ),
         horizontalSpace(8),
         Text(

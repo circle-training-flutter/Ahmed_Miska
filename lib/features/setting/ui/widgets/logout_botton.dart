@@ -1,21 +1,27 @@
+import 'package:circletraning/core/helpers/extentions.dart';
+import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../sign_up/ui/sign_up.dart';
 
-class LogOutButton extends StatelessWidget {
-  const LogOutButton({
+class LogOutAndLoginButton extends StatelessWidget {
+  final String text;
+  const LogOutAndLoginButton({
     super.key,
+    required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        push(const SignUpScreen());
+      },
       child: Container(
         width: 167.w,
         decoration: BoxDecoration(
@@ -32,9 +38,9 @@ class LogOutButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SvgPicture.asset(AppIcons.logoutIcon),
+              SVGIcon(AppIcons.logoutIcon),
               Text(
-                'logout',
+                text,
                 style: TextStyles.font14MadaRegularBlack,
               ).tr()
             ],

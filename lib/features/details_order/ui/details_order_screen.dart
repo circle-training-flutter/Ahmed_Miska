@@ -1,6 +1,6 @@
 import 'package:circletraning/core/helpers/spacing.dart';
 import 'package:circletraning/features/details_order/ui/widgets/note_of_the_order.dart';
-import 'package:circletraning/features/details_order/ui/widgets/products_of_the_order_details.dart';
+import 'package:circletraning/core/widgets/products_of_the_order_details.dart';
 import 'package:circletraning/features/details_order/ui/widgets/slider_and_track_order.dart';
 import 'package:circletraning/features/product/ui/widgets/row_of_prouducts.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +29,13 @@ class DetailsOrderScreen extends StatelessWidget {
                       child: const SliderAndTrackOrder(),
                     ),
                     verticalSpace(24),
-                    const NotesOfTheOrder(),
+                    const NotesOfTheOrder(
+                      check: true,
+                    ),
                     verticalSpace(12),
-                    const ProductsOfTheOrderDetails()
+                    const ProductsOfTheOrderDetails(
+                      usePoints: false,
+                    )
                   ],
                 ),
               ),

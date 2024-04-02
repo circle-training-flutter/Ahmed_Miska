@@ -12,7 +12,8 @@ class ContainerOfPayAndDelevary extends StatelessWidget {
     super.key,
     required this.title,
     required this.primTitle,
-    required this.icon, required this.onTap,
+    required this.icon,
+    required this.onTap,
   });
 
   @override

@@ -1,9 +1,10 @@
-import 'package:circletraning/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 
 class MySeparator extends StatelessWidget {
+  final Color color;
   const MySeparator({
     Key? key,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -24,8 +25,7 @@ class MySeparator extends StatelessWidget {
                 width: dashWidth,
                 height: dashHeight,
                 child: DecoratedBox(
-                  decoration:
-                      BoxDecoration(color: ColorManger.red.withOpacity(.3)),
+                  decoration: BoxDecoration(color: color),
                 ),
               );
             },

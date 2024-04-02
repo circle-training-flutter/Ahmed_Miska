@@ -28,17 +28,29 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.3.1
   card_swiper: ^3.0.1
+  country_picker: ^2.0.25
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  device_preview: ^1.1.0
+  dio: ^5.4.1
+  dotted_border: ^2.1.0
+  dropdown_button2: ^2.3.9
   easy_localization: ^3.0.4
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
-  google_maps_place_picker_mb: ^3.1.2
+  get_it: ^7.6.7
   lottie: ^3.0.0
   page_transition: ^2.1.0
+  pin_code_fields: ^8.0.1
+  pretty_dio_logger: ^1.3.1
   provider: ^6.1.1
+  shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -70,8 +82,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Mada
+    - family: Mada-SemiBold
       fonts:
         - asset: assets/fonts/alfont_com_Madani-Arabic-Semi-Bold.ttf
+          weight: 400
+    - family: Mada-Regular
+      fonts:
+        - asset: assets/fonts/alfont_com_Madani-Arabic-Regular-1.ttf
+          weight: 400
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

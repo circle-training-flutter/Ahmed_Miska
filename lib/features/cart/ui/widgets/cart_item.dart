@@ -1,15 +1,20 @@
-
 import 'package:circletraning/features/cart/ui/widgets/total_price_of_item_in_cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
+import '../../../../data/models/response/product_model/product_datum.dart';
 import 'counter_in_cart_item.dart';
 import 'first_row_in_cart_item.dart';
 
 class CartItem extends StatelessWidget {
+  final ProductModelItem product;
+  final Function()? onTap;
+
   const CartItem({
     super.key,
+    this.onTap,
+    required this.product,
   });
 
   @override
@@ -20,20 +25,25 @@ class CartItem extends StatelessWidget {
         vertical: 24.h,
       ),
       child: SizedBox(
-        height: 147.67.h,
         width: double.infinity,
         child: Column(
           children: [
-            const FirstRowInCartItem(),
+            FirstRowInCartItem(
+              onTap: onTap,
+              product: product,
+            ),
             verticalSpace(12),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CounterInCartItem(),
-                   TotalPriceOfItemInCartItem(),
+                  CounterInCartItem(
+                    product: product,
+                  ),
+                  TotalPriceOfItemInCartItem(
+                    product: product,
+                  ),
                 ],
               ),
             )

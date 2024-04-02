@@ -9,7 +9,8 @@ class RowOfHomePage extends StatelessWidget {
   final Function()? onTap;
   const RowOfHomePage({
     super.key,
-    required this.text, this.onTap,
+    required this.text,
+    this.onTap,
   });
 
   @override

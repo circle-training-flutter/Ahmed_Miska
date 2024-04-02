@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,8 +24,7 @@ class AddressIdRow extends StatelessWidget {
         ),
         const Spacer(),
         Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: 8.h, horizontal: 8.w),
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
           child: Text(
             'details',
             style: TextStyles.font14MadaRegularBlack
