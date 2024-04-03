@@ -19,15 +19,11 @@ class ProductProvider with ChangeNotifier {
   bool isLoading = false;
   bool isFailure = false;
 
-  Future<ApiResponse> getProducts(
-    BuildContext context, {
-    Map<String, dynamic>? query,
-  }) async {
+  Future<ApiResponse> getProducts(BuildContext context, {Map<String, dynamic>? query}) async {
     isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await productsRepo.getProduct(query: query);
-    if (apiResponse.response != null &&
-        apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
       productModel = ProductsModel.fromJson(apiResponse.response!.data!);
       if (productModel!.code == 200) {
         productModelList.clear();

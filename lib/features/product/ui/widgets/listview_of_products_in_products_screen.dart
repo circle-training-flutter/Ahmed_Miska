@@ -12,11 +12,12 @@ import '../../../home/ui/widgets/product_gridview_item.dart';
 class ListViewOfProductinProductScreen extends StatefulWidget {
   final int catId;
   final int subCatId;
+  final String text;
 
   const ListViewOfProductinProductScreen({
     Key? key,
     required this.catId,
-    required this.subCatId,
+    required this.subCatId, required this.text,
   }) : super(key: key);
 
   @override
@@ -29,24 +30,25 @@ class _ListViewOfProductinProductScreenState extends State<ListViewOfProductinPr
   @override
   void initState() {
     super.initState();
-    _updateCategoryList(widget.catId, widget.subCatId); // Call the method to fetch data
+    _updateCategoryList(widget.catId, widget.subCatId,widget.text); // Call the method to fetch data
   }
 
   @override
   void didUpdateWidget(covariant ListViewOfProductinProductScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Check if the ID has changed, and if so, update the category list
-    if (widget.catId != oldWidget.catId || widget.subCatId != oldWidget.subCatId) {
-      _updateCategoryList(widget.catId, widget.subCatId);
+    if (widget.catId != oldWidget.catId || widget.subCatId != oldWidget.subCatId|| widget.text != oldWidget.text) {
+      _updateCategoryList(widget.catId, widget.subCatId,widget.text);
     }
   }
 
   // Method to update the category list
-  void _updateCategoryList(int catId, int subCatId) {
+  void _updateCategoryList(int catId, int subCatId,String textt) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<ProductProvider>(context, listen: false).getProducts(context, query: {
         'category_id': catId,
         'sub_category_id': subCatId,
+        'title': textt
       });
     });
   }

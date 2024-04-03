@@ -8,17 +8,30 @@ class ApiService {
 
   ApiService(this._dio);
 
-  Future<Response> get(
-      {required String endpoint, Map<String, dynamic>? query}) async {
+  Future<Response> get({required String endpoint, Map<String, dynamic>? query}) async {
     try {
-      var response =
-          await _dio.get('$_baseUrl$endpoint', queryParameters: query);
+      var response = await _dio.get('$_baseUrl$endpoint', queryParameters: query);
       return response;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
     } catch (e) {
+      rethrow;
+    }
+  }
+  Future<Response> post({required String endpoint, Map<String, dynamic>? body}) async {
+    try {
+      var response = await _dio.post('$_baseUrl$endpoint', data: body);
+      return response;
+    }
+    on SocketException catch (e) {
+      throw SocketException(e.toString());
+    }
+    on FormatException catch (_) {
+      throw const FormatException("Unable to process the data");
+    }
+    catch (e) {
       rethrow;
     }
   }

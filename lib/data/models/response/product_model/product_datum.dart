@@ -73,7 +73,7 @@ class ProductModelItem extends Equatable {
         unit: json['unit'] as String?,
         weightUnit: json['weight_unit'] is double?
             ? json['weight_unit'] as double
-            : json['weight_unit'] as int, // Keep double as it is
+            : json['weight_unit'] as int, 
         priceWeightUnit: json['price_weight_unit'] is double?
             ? json['price_weight_unit'] as double
             : json['price_weight_unit'] as int,

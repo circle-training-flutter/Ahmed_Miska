@@ -19,6 +19,8 @@ class SliderImageProvider with ChangeNotifier {
   bool isSliderFailure = false;
   int notificationCount = 0;
 
+  SliderModel get sliderModelDatad => sliderModel!;
+
   Future<ApiResponse> sliderHomeRepo(BuildContext context) async {
     isloadingSlider = true;
     notifyListeners();

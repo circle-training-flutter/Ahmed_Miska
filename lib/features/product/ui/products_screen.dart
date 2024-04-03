@@ -21,6 +21,8 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> {
   int selectedProductId = 0;
   int subcatId = 0;
+  TextEditingController controller = TextEditingController();
+  String text = '';
 
   @override
   void didChangeDependencies() {
@@ -54,7 +56,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
                             child: SizedBox(
                               height: 54.h,
-                              child: const SearchBaar(),
+                              child: SearchBaar(
+                                controller: controller,
+                                onChanged: (p0) {
+                                  setState(() {
+                                    text = p0;
+                                  });
+                                },
+                              ),
                             ),
                           ),
                           verticalSpace(8),
@@ -87,6 +96,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     ListViewOfProductinProductScreen(
                       catId: selectedProductId,
                       subCatId: subcatId,
+                      text: text,
                     )
                   ],
                 ),

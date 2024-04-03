@@ -26,7 +26,7 @@ class PicturesSwiper extends StatelessWidget {
           allowImplicitScrolling: true,
           onTap: (index) {},
           itemCount:
-              provider.isloadingSlider ? 1 : provider.sSliderList!.length,
+              provider.isloadingSlider ? 1 : provider.sliderModelDatad.data!.slider!.length,
           itemBuilder: (BuildContext context, int index) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(16.r),

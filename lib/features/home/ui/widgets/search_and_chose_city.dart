@@ -18,6 +18,7 @@ class SearchAndChoseCity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller=TextEditingController();
     return SizedBox(
       // height: 54.h,
       width: double.infinity,
@@ -58,7 +59,7 @@ class SearchAndChoseCity extends StatelessWidget {
               ),
             ),
             horizontalSpace(10),
-            const SearchBaar()
+             SearchBaar(controller: controller,)
           ],
         ),
       ),
