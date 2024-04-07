@@ -9,24 +9,24 @@ import 'item_of_categgory_prouduct.dart';
 
 class ProductsGridViewInProductScreen extends StatefulWidget {
   final void Function(int productId) onProductSelected;
-
   final int id;
+  final int? index;
   const ProductsGridViewInProductScreen({
     super.key,
     required this.id,
     required this.onProductSelected,
+    this.index,
   });
 
   @override
-  State<ProductsGridViewInProductScreen> createState() =>
-      _ProductsGridViewInProductScreenState();
+  State<ProductsGridViewInProductScreen> createState() => _ProductsGridViewInProductScreenState();
 }
 
-class _ProductsGridViewInProductScreenState
-    extends State<ProductsGridViewInProductScreen> {
+class _ProductsGridViewInProductScreenState extends State<ProductsGridViewInProductScreen> {
   @override
   void initState() {
     super.initState();
+    selectIndex = widget.index ?? 0;
     _updateCategoryList(widget.id); // Call the method to fetch data
   }
 
@@ -41,10 +41,9 @@ class _ProductsGridViewInProductScreenState
 
   // Method to update the category list
   void _updateCategoryList(int id) {
-    selectIndex = 0;
+    selectIndex = widget.index ?? 0;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<SubCategoryProvider>(context, listen: false)
-          .getsubCategory(context, id);
+      Provider.of<SubCategoryProvider>(context, listen: false).getsubCategory(context, id);
     });
   }
 

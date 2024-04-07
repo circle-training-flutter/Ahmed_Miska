@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theming/colors.dart';
 
 class CustomCheckBox extends StatefulWidget {
+   final void Function(bool check) onProductSelected;
+
   const CustomCheckBox({
-    super.key,
+    super.key, required this.onProductSelected,
   });
 
   @override
@@ -22,6 +24,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         setState(() {
           _value = !_value;
         });
+        widget.onProductSelected(_value);
       },
       child: Container(
         height: 24.h,

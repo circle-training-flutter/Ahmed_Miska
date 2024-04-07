@@ -6,10 +6,12 @@ import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:circletraning/data/providers/shared_prefrance_provider.dart';
 import 'package:circletraning/data/providers/slider_image_provider.dart';
 import 'package:circletraning/features/cart/ui/cart_screen.dart';
+import 'package:circletraning/features/sign_in/ui/sign_in.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import '../../../../main.dart';
 import '../../../notification/ui/notification_screen.dart';
 import 'app_bar_icon.dart';
 
@@ -32,7 +34,10 @@ class CustomAppBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('hello', style: TextStyles.font12MadaRegularGray).tr(),
-                Text('name', style: TextStyles.font16MadaSemiBoldBlack).tr(),
+                Text(
+                  saveUserData.getUserToken() != '' ? '${saveUserData.getUserData()!.firstName} ${saveUserData.getUserData()!.lastName}' : 'name',
+                  style: TextStyles.font16MadaSemiBoldBlack,
+                ).tr(),
               ],
             ),
             const Spacer(),
@@ -40,11 +45,15 @@ class CustomAppBar extends StatelessWidget {
               builder: (context, provider, child) {
                 return GestureDetector(
                   onTap: () {
-                    push(const NotificationScreen());
+                    if (saveUserData.getUserToken() == '') {
+                      push(const SigninScreen());
+                    } else {
+                      push(const NotificationScreen());
+                    }
                   },
                   child: AppBarIcon(
                     icon: AppIcons.notificationIcon,
-                    check: provider.notificationCount != 0 ? true : false,
+                    check: saveUserData.getUserToken() != '' ? true : false,
                   ),
                 );
               },

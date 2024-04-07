@@ -11,8 +11,9 @@ import 'package:provider/provider.dart';
 
 class ProductsScreen extends StatefulWidget {
   final int? index;
+  final int? subIndex;
 
-  const ProductsScreen({Key? key, this.index}) : super(key: key);
+  const ProductsScreen({Key? key, this.index, this.subIndex}) : super(key: key);
 
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
@@ -80,6 +81,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           ),
                           verticalSpace(8),
                           ProductsGridViewInProductScreen(
+                            index: widget.subIndex ?? 0,
                             id: selectedProductId,
                             onProductSelected: (int productId) {
                               setState(

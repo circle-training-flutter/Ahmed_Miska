@@ -21,7 +21,7 @@ class SliderImageProvider with ChangeNotifier {
 
   SliderModel get sliderModelDatad => sliderModel!;
 
-  Future<ApiResponse> sliderHomeRepo(BuildContext context) async {
+  Future<ApiResponse> sliderHomeRepo() async {
     isloadingSlider = true;
     notifyListeners();
     ApiResponse apiResponse = await sliderRepo.sliderHomeRepo();
@@ -33,10 +33,10 @@ class SliderImageProvider with ChangeNotifier {
         sSliderList!.addAll(sliderModel!.data!.slider!);
       } else {
         // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(sliderModel?.message ?? ""),
-          backgroundColor: Colors.red,
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //   content: Text(sliderModel?.message ?? ""),
+        //   backgroundColor: Colors.red,
+        // ));
       }
     } else {
       isSliderFailure = true;

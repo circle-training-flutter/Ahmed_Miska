@@ -51,7 +51,7 @@ class OtpButtomSheet extends StatelessWidget {
               CustomRedButtom(
                 onTap: () {
                   pushReplacement(const CreateAndEditAccount(
-                    isEdit: true,
+                    iscreate: true,
                   ));
                 },
                 width: double.infinity,

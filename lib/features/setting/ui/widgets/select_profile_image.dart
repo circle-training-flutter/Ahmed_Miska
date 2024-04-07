@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/widgets/cached_network_image.dart';
+import '../../../../main.dart';
 
 class SelectProfileImage extends StatelessWidget {
   const SelectProfileImage({
@@ -25,12 +28,9 @@ class SelectProfileImage extends StatelessWidget {
               color: ColorManger.red,
               width: 2,
             ),
-            image: DecorationImage(
-              image: AssetImage(
-                Assets.profile,
-              ),
-              fit: BoxFit.cover,
-            ),
+          ),
+          child: CachedImage(
+            image: saveUserData.getUserToken() != '' ? saveUserData.getUserData()!.image! : Assets.initPhoto,
           ),
         ),
         Positioned(

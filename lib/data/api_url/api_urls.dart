@@ -1,10 +1,13 @@
 class AppURL {
-  static const String baseUrl = 'https://ecommerce.project-nami.xyz/api/user/';
-  static const String slider = 'home/slider';
-  static const String category = 'home/categories';
-  static const String subCategory = 'home/sub-categories';
-  static const String lastProduct = 'home/latestProducts';
-  static const String product = 'home/products';
-  static const String login = 'auth/login';
-  static const String register = 'auth/register';
+  static const String baseUrl = 'https://ecommerce.project-nami.xyz/api/';
+  static const String slider = 'user/home/slider';
+  static const String category = 'user/home/categories';
+  static const String subCategory = 'user/home/sub-categories';
+  static const String lastProduct = 'user/home/latestProducts';
+  static const String product = 'user/home/products';
+  static const String login = 'user/auth/login';
+  static const String register = 'user/auth/register';
+  static const String getCity = 'cities';
+  static const String fevoriteItem = 'user/profile/myFavorites';
+  static const String addAndRemoveFavorites = 'user/home/add-remove-favorites';
 }

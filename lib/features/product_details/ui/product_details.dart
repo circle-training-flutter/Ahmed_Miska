@@ -17,8 +17,7 @@ import '../../../data/providers/shared_prefrance_provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModelItem product;
-  const ProductDetailsScreen({Key? key, required this.product})
-      : super(key: key);
+  const ProductDetailsScreen({Key? key, required this.product}) : super(key: key);
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
@@ -34,7 +33,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     ProductModelItem product = widget.product;
-    final dynamic totalPrice = (product.price! * product.weightUnit!) ;
+    final dynamic totalPrice = (product.price! * product.weightUnit!);
     return Scaffold(
       body: SafeArea(
         child: Column(

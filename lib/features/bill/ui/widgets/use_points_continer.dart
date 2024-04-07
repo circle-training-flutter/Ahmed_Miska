@@ -17,7 +17,7 @@ class UsePointsContainer extends StatelessWidget {
       children: [
         Row(
           children: [
-            const CustomCheckBox(),
+             CustomCheckBox(onProductSelected: (bool check) {  },),
             horizontalSpace(12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

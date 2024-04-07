@@ -11,19 +11,18 @@ import '../widgets/product_of_category.dart'; // Adjust import path as needed
 
 class ListviewOfProductsInCategoryScreen extends StatefulWidget {
   final int id;
-
+  final int? index;
   const ListviewOfProductsInCategoryScreen({
     Key? key,
     required this.id,
+    this.index,
   }) : super(key: key);
 
   @override
-  State<ListviewOfProductsInCategoryScreen> createState() =>
-      _ListviewOfProductsInCategoryScreenState();
+  State<ListviewOfProductsInCategoryScreen> createState() => _ListviewOfProductsInCategoryScreenState();
 }
 
-class _ListviewOfProductsInCategoryScreenState
-    extends State<ListviewOfProductsInCategoryScreen> {
+class _ListviewOfProductsInCategoryScreenState extends State<ListviewOfProductsInCategoryScreen> {
   @override
   void initState() {
     super.initState();
@@ -42,8 +41,7 @@ class _ListviewOfProductsInCategoryScreenState
   // Method to update the category list
   void _updateCategoryList(int id) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<SubCategoryProvider>(context, listen: false)
-          .getsubCategory(context, id);
+      Provider.of<SubCategoryProvider>(context, listen: false).getsubCategory(context, id);
     });
   }
 
@@ -57,7 +55,6 @@ class _ListviewOfProductsInCategoryScreenState
               errMessage: provider.subCatfailure.errMessage,
             );
           }
-          // Check if subCategoryList is empty before fetching data
           if (provider.subCategoryList.isEmpty) {
             return LoadingWidget(height: 50.h);
           }
@@ -70,8 +67,9 @@ class _ListviewOfProductsInCategoryScreenState
                 padding: EdgeInsets.symmetric(vertical: 4.h),
                 child: GestureDetector(
                   onTap: () {
-                    push(const ProductsScreen(
-                      index: 0,
+                    push(ProductsScreen(
+                      index: widget.index ?? 0,
+                      subIndex: index,
                     ));
                   },
                   child: ProductOfCategory(

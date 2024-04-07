@@ -25,7 +25,7 @@ class ProductModelItem extends Equatable {
   final String? offerStartDate;
   final String? offerEndDate;
   final dynamic oldPrice;
-  final bool? isFavorite;
+   bool? isFavorite;
 
   ProductModelItem({
     this.id,

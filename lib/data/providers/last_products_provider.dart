@@ -18,21 +18,22 @@ class LastProductsProvider with ChangeNotifier {
   bool isLoading = false;
   bool isFailure = false;
 
-  Future<ApiResponse> getProducts(BuildContext context) async {
+  Future<ApiResponse> getProducts() async {
+    productModelList.clear();
+    notifyListeners();
     isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await lastProductsRepo.getProducts();
-    if (apiResponse.response != null &&
-        apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
       productModel = ProductModel.fromJson(apiResponse.response!.data);
       if (productModel!.code == 200) {
         productModelList.addAll(productModel!.data!);
       } else {
         // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(productModel?.message ?? ""),
-          backgroundColor: Colors.red,
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //   content: Text(productModel?.message ?? ""),
+        //   backgroundColor: Colors.red,
+        // ));
       }
     } else {
       isFailure = true;

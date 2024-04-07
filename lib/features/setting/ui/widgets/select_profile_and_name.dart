@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../main.dart';
 
 class SelectProfileAndName extends StatelessWidget {
   const SelectProfileAndName({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class SelectProfileAndName extends StatelessWidget {
           const SelectProfileImage(),
           verticalSpace(8),
           Text(
-            'name',
+            saveUserData.getUserToken() != '' ? '${saveUserData.getUserData()!.firstName!} ${saveUserData.getUserData()!.lastName!}' : 'name',
             style: TextStyles.font18MadaSemiBoldBlack,
           ).tr(),
         ],

@@ -1,6 +1,6 @@
 {
   "hello":"Hello",
-  "name": "Ahmed Miska",
+  "name": "Circle",
   "city": "Cairo",
   "search": "Search..?",
   "category": "Categories",
@@ -97,6 +97,16 @@
 "cityy":"City",
 "invited_by_user":"Invited By User",
 "edit_account":"Edit Account",
-"notification":"Notification"
+"notification":"Notification",
+"Dont_have_an_account":"Don't have an account ?",
+"Sign_up":"Sign up",
+"enter_the_code":"Inter the code",
+"the_code_is_wrong":"The code is wrong",
+"the_code_is_correct":"The code is correct",
+"select_Photo":"Select Photo",
+"take_Photo":"Take Photo",
+"choose_from_gallery":"Choose from Gallery",
+"you are not logged in":"You are not logged in",
+"please login":"Please login"
 
 }

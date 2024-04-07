@@ -1,18 +1,18 @@
 
 
-class CityModel {
-    List<CityDatum>? data;
+class GetCityModel {
+    List<CityModel>? data;
     String? message;
     int? code;
 
-    CityModel({
+    GetCityModel({
         this.data,
         this.message,
         this.code,
     });
 
-    factory CityModel.fromJson(Map<String, dynamic> json) => CityModel(
-        data: json["data"] == null ? [] : List<CityDatum>.from(json["data"]!.map((x) => CityDatum.fromJson(x))),
+    factory GetCityModel.fromJson(Map<String, dynamic> json) => GetCityModel(
+        data: json["data"] == null ? [] : List<CityModel>.from(json["data"]!.map((x) => CityModel.fromJson(x))),
         message: json["message"],
         code: json["code"],
     );
@@ -24,20 +24,20 @@ class CityModel {
     };
 }
 
-class CityDatum {
+class CityModel {
     int? id;
     String? title;
-    int? deliveryCost;
+    num? deliveryCost;
     int? regionId;
 
-    CityDatum({
+    CityModel({
         this.id,
         this.title,
         this.deliveryCost,
         this.regionId,
     });
 
-    factory CityDatum.fromJson(Map<String, dynamic> json) => CityDatum(
+    factory CityModel.fromJson(Map<String, dynamic> json) => CityModel(
         id: json["id"],
         title: json["title"],
         deliveryCost: json["delivery_cost"],

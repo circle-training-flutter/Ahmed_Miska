@@ -4,18 +4,18 @@ import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/helpers/extentions.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/heart_icon.dart';
 import '../../../../data/models/response/product_model/product_datum.dart';
+import '../../../../data/providers/add_and_remove_favorite_provider.dart';
 import '../../../product_details/ui/product_details.dart';
 
-class ProductGridviewItem extends StatelessWidget {
+class ProductGridviewItem extends StatefulWidget {
   final ProductModelItem productModel;
-
   final Function()? ontap;
   const ProductGridviewItem({
     super.key,
@@ -24,11 +24,25 @@ class ProductGridviewItem extends StatelessWidget {
   });
 
   @override
+  State<ProductGridviewItem> createState() => _ProductGridviewItemState();
+}
+
+class _ProductGridviewItemState extends State<ProductGridviewItem> {
+  bool isFav = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the favorite status based on the initial value of the product model
+    isFav = widget.productModel.isFavorite ?? false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         push(ProductDetailsScreen(
-          product: productModel,
+          product: widget.productModel,
         ));
       },
       child: Container(
@@ -50,23 +64,33 @@ class ProductGridviewItem extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        productModel.isOffer!
+                        widget.productModel.isOffer!
                             ? Container(
                                 decoration: BoxDecoration(
                                   color: ColorManger.red,
                                   borderRadius: BorderRadius.circular(5.r),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 7.w, vertical: 2.h),
+                                  padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
                                   child: Text(
-                                    '${productModel.offerValue} %',
+                                    '${widget.productModel.offerValue} %',
                                     style: TextStyles.font14MadaRegularWith,
                                   ),
                                 ),
                               )
                             : const SizedBox(),
-                        const HeartIcon()
+                        HeartIcon(
+                          onTap: () {
+                            setState(() {
+                              isFav = !isFav;
+                            });
+                            Provider.of<AddAndRemoveFavoritesProvider>(context, listen: false).addAndRemoveFavorite(
+                              widget.productModel.id!,
+                            );
+                            widget.productModel.isFavorite = isFav;
+                          },
+                          checked: isFav,
+                        )
                       ],
                     ),
                   ),
@@ -74,15 +98,14 @@ class ProductGridviewItem extends StatelessWidget {
                     height: 80.h,
                     width: double.infinity,
                     child: CachedImage(
-                      image: productModel.image!,
+                      image: widget.productModel.image!,
                     ),
                   ),
                 ],
               ),
               Text(
-                productModel.title!,
-                style: TextStyles.font14MadaRegularWith
-                    .copyWith(color: ColorManger.black),
+                widget.productModel.title!,
+                style: TextStyles.font14MadaRegularWith.copyWith(color: ColorManger.black),
               ).tr(),
               Expanded(child: Container()),
               Row(
@@ -91,7 +114,7 @@ class ProductGridviewItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        productModel.price.toString(),
+                        widget.productModel.price.toString(),
                         style: TextStyles.font16MadaSemiBoldBlack,
                       ).tr(),
                       horizontalSpace(4),
@@ -102,7 +125,7 @@ class ProductGridviewItem extends StatelessWidget {
                     ],
                   ),
                   GestureDetector(
-                    onTap: ontap,
+                    onTap: widget.ontap,
                     child: Container(
                       decoration: BoxDecoration(
                         color: ColorManger.red,

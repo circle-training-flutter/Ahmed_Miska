@@ -1,5 +1,6 @@
 import 'package:circletraning/core/helpers/extentions.dart';
 import 'package:circletraning/core/widgets/svg_icon.dart';
+import 'package:circletraning/features/main_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
-import '../../../sign_up/ui/sign_up.dart';
+import '../../../../main.dart';
+import '../../../sign_in/ui/sign_in.dart';
+
 
 class LogOutAndLoginButton extends StatelessWidget {
   final String text;
@@ -20,7 +23,13 @@ class LogOutAndLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        push(const SignUpScreen());
+        // ignore: unnecessary_null_comparison
+        if (saveUserData.getUserToken() != '') {
+          saveUserData.clearSharedData();
+          push(const MainScreen());
+        } else {
+          push(const SigninScreen());
+        }
       },
       child: Container(
         width: 167.w,
@@ -40,7 +49,8 @@ class LogOutAndLoginButton extends StatelessWidget {
             children: [
               SVGIcon(AppIcons.logoutIcon),
               Text(
-                text,
+                // ignore: unnecessary_null_comparison
+                saveUserData.getUserToken() != '' ? 'logout' : 'login',
                 style: TextStyles.font14MadaRegularBlack,
               ).tr()
             ],

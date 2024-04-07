@@ -16,21 +16,20 @@ class CategoryProvider with ChangeNotifier {
   bool isloading = false;
   bool isFailure = false;
 
-  Future<ApiResponse> getCategoryy(BuildContext context) async {
+  Future<ApiResponse> getCategoryy() async {
     isloading = true;
     notifyListeners();
     ApiResponse apiResponse = await categoryRepo.getCategoryy();
-    if (apiResponse.response != null &&
-        apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
       categoryModel = CategoryModel.fromJson(apiResponse.response!.data);
       if (categoryModel!.code == 200) {
         categoryModelList.addAll(categoryModel!.data!);
       } else {
         // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(categoryModel?.message ?? ""),
-          backgroundColor: Colors.red,
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //   content: Text(categoryModel?.message ?? ""),
+        //   backgroundColor: Colors.red,
+        // ));
       }
     } else {
       isFailure = true;

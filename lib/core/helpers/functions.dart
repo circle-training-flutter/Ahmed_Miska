@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-num ceil(double a, double b) {
-  return (a / b).ceil();
-}
+
 
 Future displayBottomSheet(BuildContext context, Widget child) {
   return showModalBottomSheet(
@@ -17,3 +15,4 @@ Future displayBottomSheet(BuildContext context, Widget child) {
     },
   );
 }
+

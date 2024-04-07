@@ -1,6 +1,6 @@
 {
   "hello":"اهلا وسهلا",
-  "name": "أحمد مسكه",
+  "name": "Circle",
   "city": "القاهرة",
   "search": "منتج معين..؟",
   "category": "الاقسام",
@@ -97,5 +97,15 @@
 "cityy":"المدينة",
 "invited_by_user":"مدعو بواسطة مستخدم ؟",
 "edit_account":"تعديل الحساب",
-"notification":"الاشعارات"
+"notification":"الاشعارات",
+"Dont_have_an_account":"ليس لديك حساب ؟",
+"Sign_up":"انشاء حساب",
+"enter_the_code":"ادخل الكود",
+"the_code_is_wrong":"الكود غير صحيح",
+"the_code_is_correct":"الكود صحيح",
+"select_Photo":"تحديد الصورة",
+"take_Photo":"التقاط الصورة",
+"you are not logged in":"ليس لديك حساب"
+
+
 }

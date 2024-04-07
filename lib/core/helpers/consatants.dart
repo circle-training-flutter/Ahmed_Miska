@@ -5,6 +5,7 @@ class Assets {
   static String pic3 = 'assets/images/pic3.png';
   static String pic4 = 'assets/images/pic4.png';
   static String pic5 = 'assets/images/pic5.png';
+  static String initPhoto = 'assets/images/init_photo.png';
 
   static String profile = 'assets/images/profile.png';
   static String doneGIF = 'assets/images/done_gif.gif';
@@ -20,8 +21,7 @@ class AppIcons {
   static String heartIcon = 'assets/icons/heart_icon.svg';
   static String addCartIcon = 'assets/icons/add_cart_icon.svg';
   static String homeIconSelected = 'assets/icons/home_icon_selected.svg';
-  static String categoryIconSelected =
-      'assets/icons/category_icon_selected.svg';
+  static String categoryIconSelected = 'assets/icons/category_icon_selected.svg';
   static String mapIconSelected = 'assets/icons/map_icon_selected.svg';
   static String settingsIconSelected = 'assets/icons/setting_icon_selected.svg';
   static String pointsIcon = 'assets/icons/points_icon.svg';
@@ -44,8 +44,7 @@ class AppIcons {
   static String acceptedOrderIcon = 'assets/icons/accepted_order_bag_icon.svg';
   static String completedOrderIcon = 'assets/icons/completed_icon.svg';
   static String deliveredPagIcon = 'assets/icons/delivered_pag_icon.svg';
-  static String deliveryProgressIcon =
-      'assets/icons/delivery_progress_icon.svg';
+  static String deliveryProgressIcon = 'assets/icons/delivery_progress_icon.svg';
   static String preparingIcon = 'assets/icons/preparing_icon.svg';
   static String editIcon = 'assets/icons/edit_icon.svg';
   static String cancelIcon = 'assets/icons/cancel_icon.svg';
@@ -74,4 +73,5 @@ class AppIcons {
   static String cityIcon = 'assets/icons/city_icon.svg';
   static String cartIcon = 'assets/icons/cart_icon.svg';
   static String notificationIcon = 'assets/icons/notification_icon.svg';
+  static String redHeartIcon = 'assets/icons/red_heart_icon.svg';
 }

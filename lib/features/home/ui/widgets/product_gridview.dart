@@ -22,6 +22,7 @@ class _ProductGridviewState extends State<ProductGridview> {
   SharedPref sharedPref = getIt();
   @override
   Widget build(BuildContext context) {
+    // Provider.of<LastProductsProvider>(context).getProducts();
     return SizedBox(
       // height: (191.33.h + 12.h) * ceil(8,2),
       // width: double.infinity,
@@ -30,15 +31,12 @@ class _ProductGridviewState extends State<ProductGridview> {
         child: Consumer<LastProductsProvider>(
           builder: (context, homeProvider, child) {
             if (homeProvider.isFailure) {
-              return CustomErrorWidget(
-                  errMessage: homeProvider.productfailure.errMessage);
+              return CustomErrorWidget(errMessage: homeProvider.productfailure.errMessage);
             }
             return GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: homeProvider.isLoading
-                  ? 2
-                  : homeProvider.productModelList.length,
+              itemCount: homeProvider.isLoading ? 2 : homeProvider.productModelList.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: .8,

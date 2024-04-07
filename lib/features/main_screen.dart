@@ -15,6 +15,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
+
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -46,33 +48,25 @@ class _MainScreenState extends State<MainScreen> {
                 _onItemTapped(0);
                 // context.pushNamed(Routes.home);
               },
-              icon: _selectedIndex == 0
-                  ? AppIcons.homeIconSelected
-                  : AppIcons.homeIcon,
+              icon: _selectedIndex == 0 ? AppIcons.homeIconSelected : AppIcons.homeIcon,
             ),
             CustomButtomIcon(
               onTap: () {
                 _onItemTapped(1);
               },
-              icon: _selectedIndex == 1
-                  ? AppIcons.categoryIconSelected
-                  : AppIcons.categoryIcon,
+              icon: _selectedIndex == 1 ? AppIcons.categoryIconSelected : AppIcons.categoryIcon,
             ),
             CustomButtomIcon(
               onTap: () {
                 _onItemTapped(2);
               },
-              icon: _selectedIndex == 2
-                  ? AppIcons.mapIconSelected
-                  : AppIcons.mapIcon,
+              icon: _selectedIndex == 2 ? AppIcons.mapIconSelected : AppIcons.mapIcon,
             ),
             CustomButtomIcon(
               onTap: () {
                 _onItemTapped(3);
               },
-              icon: _selectedIndex == 3
-                  ? AppIcons.settingsIconSelected
-                  : AppIcons.settingsIcon,
+              icon: _selectedIndex == 3 ? AppIcons.settingsIconSelected : AppIcons.settingsIcon,
             ),
           ],
         ),

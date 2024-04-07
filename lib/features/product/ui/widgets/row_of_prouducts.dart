@@ -12,10 +12,11 @@ import '../../../../core/theming/styles.dart';
 class AppBarOfReturnedScreens extends StatelessWidget {
   final String title;
   final bool? check;
+  final void Function()? onTap;
   const AppBarOfReturnedScreens({
     super.key,
     required this.title,
-    this.check,
+    this.check, this.onTap,
   });
 
   @override
@@ -28,7 +29,7 @@ class AppBarOfReturnedScreens extends StatelessWidget {
         child: Row(
           children: [
             GestureDetector(
-              onTap: () {
+              onTap: onTap ?? () {
                 check == true ? pushAndRemoveUntil(const MainScreen()) : pop();
               },
               child: SVGIcon(

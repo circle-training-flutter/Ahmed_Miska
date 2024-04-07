@@ -9,9 +9,11 @@ import '../../../../core/helpers/functions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../main.dart';
 import '../../../about_app/ui/about_app_screen.dart';
 import '../../../contact_us/ui/contact_us_screen.dart';
 import '../../../create_and_edit_account/ui/create_and_edit_account.dart';
+import '../../../sign_in/ui/sign_in.dart';
 import 'chose_language_buttom_sheet.dart';
 
 class SettingsWidget extends StatelessWidget {
@@ -21,6 +23,7 @@ class SettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    saveUserData.getLang();
     return Container(
       height: 374.h,
       width: double.infinity,
@@ -44,15 +47,19 @@ class SettingsWidget extends StatelessWidget {
             ),
             RowOfSetSettings(
               onTap: () {
-                push(const CreateAndEditAccount(isEdit: false));
+                if (saveUserData.getUserToken() == '') {
+                  push(const SigninScreen());
+                } else {
+                  push(const CreateAndEditAccount(iscreate: false));
+                }
               },
               text: 'modify_my_account',
               icon: AppIcons.editProfileIcon,
             ),
             verticalSpace(16),
             RowOfSetSettings(
-              onTap: () {
-                displayBottomSheet(context, const ChoseLanguageButtomSheet());
+              onTap: () async {
+                await displayBottomSheet(context, const ChoseLanguageButtomSheet());
               },
               text: 'language',
               icon: AppIcons.languageIcon,
@@ -85,8 +92,7 @@ class SettingsWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+                    padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
                     child: SVGIcon(
                       AppIcons.deleteAccountIcon,
                       height: 24.h,
@@ -95,8 +101,7 @@ class SettingsWidget extends StatelessWidget {
                   ),
                   Text(
                     'delete_account',
-                    style: TextStyles.font14MadaRegularBlack
-                        .copyWith(color: ColorManger.red),
+                    style: TextStyles.font14MadaRegularBlack.copyWith(color: ColorManger.red),
                   ).tr(),
                 ],
               ),

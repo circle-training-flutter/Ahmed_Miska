@@ -9,7 +9,7 @@ import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/theming/colors.dart';
 
 class ListViewOfCategoryInCategoryScreen extends StatefulWidget {
-  final void Function(int productId) onProductSelected;
+  final void Function(int productId,int index ) onProductSelected;
 
   const ListViewOfCategoryInCategoryScreen({
     Key? key,
@@ -17,12 +17,10 @@ class ListViewOfCategoryInCategoryScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ListViewOfCategoryInCategoryScreen> createState() =>
-      _ListViewOfCategoryInCategoryScreenState();
+  State<ListViewOfCategoryInCategoryScreen> createState() => _ListViewOfCategoryInCategoryScreenState();
 }
 
-class _ListViewOfCategoryInCategoryScreenState
-    extends State<ListViewOfCategoryInCategoryScreen> {
+class _ListViewOfCategoryInCategoryScreenState extends State<ListViewOfCategoryInCategoryScreen> {
   int _selectedIndex = 0;
 
   @override
@@ -55,7 +53,7 @@ class _ListViewOfCategoryInCategoryScreenState
                       _selectedIndex = index;
                     },
                   );
-                  widget.onProductSelected(categoryModel.id!);
+                  widget.onProductSelected(categoryModel.id!,index);
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),

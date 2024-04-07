@@ -16,6 +16,7 @@ class CategoryScreen extends StatefulWidget {
 
 class CategoryScreenState extends State<CategoryScreen> {
   int selectedProductId = 44;
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,17 @@ class CategoryScreenState extends State<CategoryScreen> {
               children: [
                 // Pass the onProductSelected callback to ListViewOfCategoryInCategoryScreen
                 ListViewOfCategoryInCategoryScreen(
-                  onProductSelected: (productId) {
+                  onProductSelected: (productId, index) {
                     setState(() {
                       selectedProductId = productId;
+                      _selectedIndex = index;
                     });
                   },
                 ),
                 horizontalSpace(16),
-                // Pass the selectedProductId to ListviewOfProductsInCategoryScreen
                 ListviewOfProductsInCategoryScreen(
                   id: selectedProductId,
+                  index: _selectedIndex,
                 ),
               ],
             ),

@@ -8,11 +8,19 @@ import '../../../../core/helpers/consatants.dart';
 import '../../../../core/helpers/extentions.dart';
 import '../../../../core/widgets/custom_red_buttom.dart';
 import '../../../../core/widgets/svg_icon.dart';
+import '../../../../loca.dart';
+import '../../../../main.dart';
 import 'listview_of_chose_lang.dart';
 
-class ChoseLanguageButtomSheet extends StatelessWidget {
+class ChoseLanguageButtomSheet extends StatefulWidget {
   const ChoseLanguageButtomSheet({Key? key}) : super(key: key);
 
+  @override
+  State<ChoseLanguageButtomSheet> createState() => _ChoseLanguageButtomSheetState();
+}
+
+class _ChoseLanguageButtomSheetState extends State<ChoseLanguageButtomSheet> {
+  int _index = 0;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -49,10 +57,20 @@ class ChoseLanguageButtomSheet extends StatelessWidget {
                   ],
                 ),
                 verticalSpace(16),
-                const ListviewOfChoseLang(),
+                ListviewOfChoseLang(onindexSelected: (int index) {
+                  _index = index;
+                }),
                 verticalSpace(16),
                 CustomRedButtom(
                   onTap: () {
+                    if (_index == 0) {
+                      saveUserData.saveLang('ar');
+                      LocalizationCheck.changelang(context);
+                    }
+                    if (_index == 1) {
+                      saveUserData.saveLang('en');
+                      LocalizationCheck.changelang(context);
+                    }
                     pop();
                   },
                   width: double.infinity,

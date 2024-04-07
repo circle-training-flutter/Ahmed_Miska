@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'chose_lang_row.dart';
 
 class ListviewOfChoseLang extends StatefulWidget {
+  final void Function(int index) onindexSelected;
   const ListviewOfChoseLang({
     super.key,
+    required this.onindexSelected,
   });
 
   @override
@@ -27,6 +28,7 @@ class _ListviewOfChoseLangState extends State<ListviewOfChoseLang> {
                 _index = index;
               },
             );
+            widget.onindexSelected(_index);
           },
           child: ChoseLanguageRow(
             text: index == 0 ? 'عربي' : 'English',
