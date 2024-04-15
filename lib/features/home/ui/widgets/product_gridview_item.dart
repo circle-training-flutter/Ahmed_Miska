@@ -12,6 +12,7 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/heart_icon.dart';
 import '../../../../data/models/response/product_model/product_datum.dart';
 import '../../../../data/providers/add_and_remove_favorite_provider.dart';
+import '../../../../data/providers/last_products_provider.dart';
 import '../../../product_details/ui/product_details.dart';
 
 class ProductGridviewItem extends StatefulWidget {
@@ -28,14 +29,13 @@ class ProductGridviewItem extends StatefulWidget {
 }
 
 class _ProductGridviewItemState extends State<ProductGridviewItem> {
-  bool isFav = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize the favorite status based on the initial value of the product model
-    isFav = widget.productModel.isFavorite ?? false;
-  }
+  // bool isFav = false;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Initialize the favorite status based on the initial value of the product model
+  //   isFav = widget.productModel.isFavorite ?? false;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,14 +82,15 @@ class _ProductGridviewItemState extends State<ProductGridviewItem> {
                         HeartIcon(
                           onTap: () {
                             setState(() {
-                              isFav = !isFav;
+                              widget.productModel.isFavorite = !widget.productModel.isFavorite!;
                             });
                             Provider.of<AddAndRemoveFavoritesProvider>(context, listen: false).addAndRemoveFavorite(
                               widget.productModel.id!,
                             );
-                            widget.productModel.isFavorite = isFav;
+                            widget.productModel.isFavorite = widget.productModel.isFavorite;
+                            Provider.of<LastProductsProvider>(context, listen: false).updateFavoriteStatus(widget.productModel.id!, widget.productModel.isFavorite!);
                           },
-                          checked: isFav,
+                          checked: widget.productModel.isFavorite,
                         )
                       ],
                     ),

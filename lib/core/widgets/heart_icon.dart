@@ -1,7 +1,9 @@
 import 'package:circletraning/core/widgets/svg_icon.dart';
 import 'package:circletraning/data/providers/add_and_remove_favorite_provider.dart';
+import 'package:circletraning/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/consatants.dart';
@@ -9,11 +11,12 @@ import '../theming/colors.dart';
 
 class HeartIcon extends StatefulWidget {
   final bool? checked;
- final void Function()? onTap;
-  
+  final void Function()? onTap;
+
   const HeartIcon({
     super.key,
-    this.checked, this.onTap,
+    this.checked,
+    this.onTap,
   });
 
   @override
@@ -24,9 +27,13 @@ class _HeartIconState extends State<HeartIcon> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AddAndRemoveFavoritesProvider>(
-      builder: (context,provider,child) {
+      builder: (context, provider, child) {
         return GestureDetector(
-          onTap: widget.onTap,
+          onTap: saveUserData.getUserToken() != ''
+              ? widget.onTap
+              : () {
+                  Fluttertoast.showToast(msg: 'please login first');
+                },
           child: Container(
             decoration: BoxDecoration(
               color: ColorManger.white,
@@ -42,7 +49,7 @@ class _HeartIconState extends State<HeartIcon> {
             ),
           ),
         );
-      }
+      },
     );
   }
 }

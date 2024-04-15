@@ -53,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                       verticalSpace(12),
                       RowOfNameAndfavorite(
-                        title: product.title!,
+                        product: product,
                       ),
                       verticalSpace(12),
                       SizedBox(

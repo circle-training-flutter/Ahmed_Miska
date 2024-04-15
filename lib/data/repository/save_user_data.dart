@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:circletraning/core/utils/app_constants.dart';
 import 'package:circletraning/data/datasource/remote/dio/api_service.dart';
-import 'package:circletraning/data/models/response/login_model/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/helpers/extentions.dart';
 import '../../features/main_screen.dart';
+import '../models/response/auth_model/auth_model.dart';
 
 class SaveUserData {
   final SharedPreferences sharedPreferences;
@@ -15,7 +15,7 @@ class SaveUserData {
 
   /// save SharedData
 
-  Future<void> saveUserData(LoginBody loginBody) async {
+  Future<void> saveUserData(AuthModel loginBody) async {
     String userSavedData = json.encode(loginBody.data!.user);
     try {
       await sharedPreferences.setString(AppConstants.userData, userSavedData);

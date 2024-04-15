@@ -2,6 +2,7 @@ import 'package:circletraning/core/errors/failures.dart';
 import 'package:circletraning/data/models/response/product_model/product_datum.dart';
 import 'package:circletraning/data/models/response/product_model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../models/response/base/api_response.dart';
 import '../repository/last_products_repo.dart';
 
@@ -29,6 +30,7 @@ class LastProductsProvider with ChangeNotifier {
       if (productModel!.code == 200) {
         productModelList.addAll(productModel!.data!);
       } else {
+        Fluttertoast.showToast(msg: productModel!.message!);
         // ignore: use_build_context_synchronously
         // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         //   content: Text(productModel?.message ?? ""),
@@ -43,6 +45,14 @@ class LastProductsProvider with ChangeNotifier {
     isLoading = false;
     notifyListeners();
     return apiResponse;
+  }
+
+  void updateFavoriteStatus(int productId, bool isFavorite) {
+    int index = productModelList.indexWhere((product) => product.id == productId);
+    if (index != -1) {
+      productModelList[index].isFavorite = isFavorite;
+      notifyListeners();
+    }
   }
 
   // Future<void> getProducts() async {

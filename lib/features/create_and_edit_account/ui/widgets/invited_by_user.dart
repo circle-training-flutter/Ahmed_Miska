@@ -7,10 +7,10 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/custom_check_box.dart';
 
 class InvitedByUser extends StatefulWidget {
-
   final TextEditingController controller;
   const InvitedByUser({
-    super.key,  required this.controller,
+    super.key,
+    required this.controller,
   });
 
   @override
@@ -18,8 +18,7 @@ class InvitedByUser extends StatefulWidget {
 }
 
 class _InvitedByUserState extends State<InvitedByUser> {
-  Key formKey= GlobalKey<FormState>();
-
+  Key formKey = GlobalKey<FormState>();
 
   bool isChecked = false;
   @override
@@ -45,8 +44,9 @@ class _InvitedByUserState extends State<InvitedByUser> {
         verticalSpace(16),
         isChecked
             ? CustomInputTextField(
-                controller:widget. controller,
-                formKey:formKey,
+                readOnly: false,
+                controller: widget.controller,
+                formKey: formKey,
                 hitText: 'enter_the_code',
               )
             : const SizedBox(),

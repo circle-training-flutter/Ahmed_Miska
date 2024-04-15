@@ -23,6 +23,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void didChangeDependencies() {
     if (!_isInitialized) {
       Provider.of<FevoriteItemProvider>(context).getProducts(context);
+
       _isInitialized = true;
     }
     super.didChangeDependencies();
@@ -30,7 +31,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   // @override
   // void dispose() {
-  //   Provider.of<LastProductsProvider>(context, listen: true).getProducts();
+  //   Provider.of<LastProductsProvider>(context, listen: false).getProducts();
   //   super.dispose();
   // }
 

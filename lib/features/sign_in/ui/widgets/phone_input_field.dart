@@ -7,6 +7,7 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/svg_icon.dart';
 
 class CustomInputTextField extends StatefulWidget {
+  final bool readOnly;
   final TextEditingController controller;
   final Key formKey;
   final String? Function(String?)? validator;
@@ -20,7 +21,7 @@ class CustomInputTextField extends StatefulWidget {
     this.validator,
     this.keyboardType,
     required this.hitText,
-    this.prefixIcon,
+    this.prefixIcon, required this.readOnly,
   });
 
   @override
@@ -33,6 +34,7 @@ class _CustomInputTextFieldState extends State<CustomInputTextField> {
     return Form(
       key: widget.formKey,
       child: TextFormField(
+        readOnly: widget.readOnly,
         controller: widget.controller,
         validator: widget.validator,
         keyboardType: widget.keyboardType,

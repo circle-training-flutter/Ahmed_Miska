@@ -80,6 +80,7 @@ class _CreateAndEditAccountState extends State<CreateAndEditAccount> {
                         ),
                         verticalSpace(32),
                         CustomInputTextField(
+                          readOnly: true,
                           controller: provider.phoneController,
                           formKey: provider.phoneFormKey,
                           hitText: 'phone_number',
@@ -131,7 +132,6 @@ class _CreateAndEditAccountState extends State<CreateAndEditAccount> {
                           image: _image,
                         ),
                       );
-                      
                     }
                   },
                   width: double.infinity,

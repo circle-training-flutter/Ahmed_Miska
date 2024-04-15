@@ -1,12 +1,14 @@
 import 'package:circletraning/data/models/body/login_request_model.dart';
+import 'package:circletraning/data/providers/register_provider.dart';
 import 'package:circletraning/data/repository/login_repo.dart';
 import 'package:circletraning/features/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:provider/provider.dart';
 import '../../core/helpers/extentions.dart';
+import '../../features/create_and_edit_account/ui/create_and_edit_account.dart';
+import '../models/response/auth_model/auth_model.dart';
 import '../models/response/base/api_response.dart';
-import '../models/response/login_model/login_model.dart';
 import '../repository/save_user_data.dart';
 
 class LoginProvider with ChangeNotifier {
@@ -24,14 +26,14 @@ class LoginProvider with ChangeNotifier {
 
   ///variables
   bool _isLoading = false;
-  LoginBody? _loginBody;
+  AuthModel? _loginBody;
 
   ///getters
   bool get isLoading => _isLoading;
-  LoginBody? get loginBody => _loginBody;
+  AuthModel? get loginBody => _loginBody;
 
   ///calling APIs Functions
-  Future<ApiResponse> login(LoginRequestBody body) async {
+  Future<ApiResponse> login(LoginRequestBody body, BuildContext context) async {
     _isLoading = true;
     notifyListeners();
 
@@ -39,21 +41,19 @@ class LoginProvider with ChangeNotifier {
 
     if (responseModel.response != null && responseModel.response?.statusCode == 200) {
       _isLoading = false;
-      _loginBody = LoginBody.fromJson(responseModel.response?.data);
+      _loginBody = AuthModel.fromJson(responseModel.response?.data);
       if (_loginBody != null && _loginBody?.code == 200) {
         if (_loginBody?.data?.user!.id != null) {
           saveUserData.saveUserData(_loginBody!);
           saveUserData.saveUserToken(_loginBody?.data?.auth?.token ?? '');
           phoneController.text = '';
           pushAndRemoveUntil(const MainScreen());
-          // pushAndRemoveUntil(const BottomNavigationBarApp());
-          // await authRepo.updateFCMToken();
         }
       } else if (_loginBody?.code == 422) {
         Fluttertoast.showToast(msg: responseModel.response?.data['message']);
-        // push(const CreateAndEditAccount(
-        //   isEdit: false,
-        // ));
+        // ignore: use_build_context_synchronously
+        Provider.of<RegisterProvider>(context, listen: false).phoneController = phoneController;
+        push(const CreateAndEditAccount(iscreate: true));
       }
     } else {
       _isLoading = false;

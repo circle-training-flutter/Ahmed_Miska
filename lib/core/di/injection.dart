@@ -56,6 +56,7 @@ Future<void> init() async {
       ));
   getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider(
         registerRepo: getIt(),
+        getIt(),
       ));
 
   /// Repos

@@ -7,14 +7,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/helpers/consatants.dart';
-import '../../../core/helpers/extentions.dart';
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theming/styles.dart';
 import '../../../core/widgets/svg_icon.dart';
 import '../../../data/models/body/login_request_model.dart';
-import '../../create_and_edit_account/ui/create_and_edit_account.dart';
 import '../../product/ui/widgets/row_of_prouducts.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -60,6 +57,7 @@ class SigninScreen extends StatelessWidget {
                           return Column(
                             children: [
                               CustomInputTextField(
+                                readOnly: false,
                                 controller: provider.phoneController,
                                 formKey: provider.formKey,
                                 hitText: 'phone_number',
@@ -76,13 +74,9 @@ class SigninScreen extends StatelessWidget {
                                 onTap: () {
                                   if (provider.formKey.currentState!.validate()) {
                                     if (provider.phoneController.text.length == 11) {
-                                      provider.login(LoginRequestBody(
-                                        provider.phoneController.text.substring(1),
-                                      ));
+                                      provider.login(LoginRequestBody(provider.phoneController.text.substring(1)), context);
                                     } else {
-                                      provider.login(LoginRequestBody(
-                                        provider.phoneController.text,
-                                      ));
+                                      provider.login(LoginRequestBody(provider.phoneController.text), context);
                                     }
                                   }
                                 },
@@ -101,24 +95,6 @@ class SigninScreen extends StatelessWidget {
                                 ),
                               ),
                               verticalSpace(16),
-                              Center(
-                                child: Row(
-                                  children: [
-                                    const Spacer(),
-                                    Text(
-                                      'Dont_have_an_account',
-                                      style: TextStyles.font12MadaRegularGray,
-                                    ).tr(),
-                                    TextButton(
-                                      onPressed: () {
-                                        push(const CreateAndEditAccount(iscreate: true));
-                                      },
-                                      child: Text('Sign_up', style: TextStyles.font12MadaRegularRed).tr(),
-                                    ),
-                                    const Spacer()
-                                  ],
-                                ),
-                              )
                             ],
                           );
                         },
