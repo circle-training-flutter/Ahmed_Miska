@@ -10,4 +10,6 @@ class AppURL {
   static const String getCity = 'cities';
   static const String fevoriteItem = 'user/profile/myFavorites';
   static const String addAndRemoveFavorites = 'user/home/add-remove-favorites';
+  static const String calculateOrderCost = 'user/orders/calculateOrderCost';
+  static const String storeOrder = 'user/orders';
 }

@@ -1,4 +1,5 @@
 import 'package:circletraning/core/theming/styles.dart';
+import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,12 +11,21 @@ import '../theming/colors.dart';
 import 'dashed_divider.dart';
 import '../../features/details_order/ui/widgets/listview_od_products_in_product_screen.dart';
 
-class ProductsOfTheOrderDetails extends StatelessWidget {
+class ProductsOfTheOrderDetails extends StatefulWidget {
   final bool usePoints;
+  final Function(bool) onTab;
   const ProductsOfTheOrderDetails({
     super.key,
     required this.usePoints,
+    required this.onTab,
   });
+
+  @override
+  State<ProductsOfTheOrderDetails> createState() => _ProductsOfTheOrderDetailsState();
+}
+
+class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
+  bool useboint = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +53,20 @@ class ProductsOfTheOrderDetails extends StatelessWidget {
             verticalSpace(12),
             MySeparator(color: ColorManger.gray.withOpacity(.3)),
             verticalSpace(12),
-            usePoints ? const UsePointsContainer() : horizontalSpace(1),
-            const TotalPriceRow()
+            widget.usePoints
+                ? UsePointsContainer(
+                    // ignore: avoid_types_as_parameter_names
+                    onTab: (bool) {
+                      widget.onTab(bool);
+                      setState(() {
+                        useboint = bool;
+                      });
+                    },
+                  )
+                : horizontalSpace(1),
+            TotalPriceRow(
+              usePoints: useboint,
+            )
           ],
         ),
       ),
@@ -53,8 +75,10 @@ class ProductsOfTheOrderDetails extends StatelessWidget {
 }
 
 class TotalPriceRow extends StatelessWidget {
+  final bool usePoints;
   const TotalPriceRow({
     super.key,
+    required this.usePoints,
   });
 
   @override
@@ -68,16 +92,18 @@ class TotalPriceRow extends StatelessWidget {
         const Spacer(),
         Consumer<SharedPref>(builder: (context, sharedPref, child) {
           return Text(
-            sharedPref.totalPrice().toString(),
-            style: TextStyles.font18MadaSemiBoldBlack
-                .copyWith(color: ColorManger.red),
+            usePoints
+                ? (Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.grandTotal!.toDouble() +
+                        Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.points!)
+                    .toString()
+                : Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.grandTotal.toString(),
+            style: TextStyles.font18MadaSemiBoldBlack.copyWith(color: ColorManger.red),
           ).tr();
         }),
         horizontalSpace(4),
         Text(
           'egp',
-          style:
-              TextStyles.font12MadaRegularGray.copyWith(color: ColorManger.red),
+          style: TextStyles.font12MadaRegularGray.copyWith(color: ColorManger.red),
         ).tr()
       ],
     );
@@ -99,7 +125,7 @@ class OrderRow extends StatelessWidget {
         ).tr(),
         const Spacer(),
         Text(
-          'price',
+          Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.deliveryPrice.toString(),
           style: TextStyles.font16MadaSemiBoldBlack,
         ).tr(),
         horizontalSpace(4),

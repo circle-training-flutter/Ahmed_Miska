@@ -1,14 +1,18 @@
 import 'package:circletraning/core/theming/styles.dart';
+import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/widgets/custom_check_box.dart';
 import '../../../../core/widgets/dashed_divider.dart';
 
 class UsePointsContainer extends StatelessWidget {
+  final void Function(bool) onTab;
   const UsePointsContainer({
     super.key,
+    required this.onTab,
   });
 
   @override
@@ -17,7 +21,11 @@ class UsePointsContainer extends StatelessWidget {
       children: [
         Row(
           children: [
-             CustomCheckBox(onProductSelected: (bool check) {  },),
+            CustomCheckBox(
+              onProductSelected: (bool check) {
+                onTab(check);
+              },
+            ),
             horizontalSpace(12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +37,7 @@ class UsePointsContainer extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '( ${tr('130')} )',
+                      '( ${Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.totalPoints!.abs()} )',
                       style: TextStyles.font14MadaSemiBoldBlack,
                     ),
                     horizontalSpace(4),
@@ -43,7 +51,7 @@ class UsePointsContainer extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              '- ${tr('130')}',
+              Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.points!.toString(),
               style: TextStyles.font16MadaSemiBoldBlack,
             ),
             horizontalSpace(4),

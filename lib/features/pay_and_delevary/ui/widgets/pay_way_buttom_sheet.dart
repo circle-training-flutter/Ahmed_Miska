@@ -11,7 +11,8 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/custom_red_buttom.dart';
 
 class PayWayButtomSheet extends StatelessWidget {
-  const PayWayButtomSheet({Key? key}) : super(key: key);
+  final void Function(String) onTap;
+  const PayWayButtomSheet({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,12 @@ class PayWayButtomSheet extends StatelessWidget {
               verticalSpace(24),
               const PayWayAndClose(),
               verticalSpace(30),
-              const PayWayListView(),
+              PayWayListView(
+                // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+                onTap: (String) {
+                  onTap(String);
+                },
+              ),
               verticalSpace(26),
               CustomRedButtom(
                 onTap: () {

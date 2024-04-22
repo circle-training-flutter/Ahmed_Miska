@@ -39,9 +39,7 @@ class ListviewOfItemsInPayAndDelevaryScreen extends StatelessWidget {
                     product: sharedPref.cartItems[index],
                   ),
                   verticalSpace(12),
-                  index != sharedPref.cartItems.length - 1
-                      ? MySeparator(color: ColorManger.red.withOpacity(.3))
-                      : const SizedBox(),
+                  index != sharedPref.cartItems.length - 1 ? MySeparator(color: ColorManger.red.withOpacity(.3)) : const SizedBox(),
                 ],
               );
             },

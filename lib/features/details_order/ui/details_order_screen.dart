@@ -33,8 +33,9 @@ class DetailsOrderScreen extends StatelessWidget {
                       check: true,
                     ),
                     verticalSpace(12),
-                    const ProductsOfTheOrderDetails(
-                      usePoints: false,
+                     ProductsOfTheOrderDetails(
+                      // ignore: avoid_types_as_parameter_names
+                      usePoints: false, onTab: (bool ) {  },
                     )
                   ],
                 ),

@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:circletraning/data/api_url/api_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../core/utils/app_constants.dart';
 
 class ApiService {
@@ -13,12 +11,11 @@ class ApiService {
   late String lang;
   final SharedPreferences sharedPreferences;
 
-  ApiService(this._dio, this.sharedPreferences){
-        token = sharedPreferences.getString(AppConstants.userTOKEN)??"" ;
-    lang = sharedPreferences.getString(AppConstants.lang)?? "ar" ;
-
+  ApiService(this._dio, this.sharedPreferences) {
+    token = sharedPreferences.getString(AppConstants.userTOKEN) ?? "";
+    lang = sharedPreferences.getString(AppConstants.lang) ?? "ar";
     _dio
-    ..options.baseUrl = _baseUrl
+      ..options.baseUrl = _baseUrl
       ..httpClientAdapter
       ..options.headers = {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -26,14 +23,11 @@ class ApiService {
         'Authorization': token,
         'lang': lang,
       };
-
   }
-
-
 
   Future<Response> get({required String endpoint, Map<String, dynamic>? query}) async {
     try {
-      var response = await _dio.get('$_baseUrl$endpoint', queryParameters: query );
+      var response = await _dio.get('$_baseUrl$endpoint', queryParameters: query);
       return response;
     } on SocketException catch (e) {
       throw SocketException(e.toString());

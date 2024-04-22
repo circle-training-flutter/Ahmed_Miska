@@ -2,8 +2,9 @@ import 'package:circletraning/features/pay_and_delevary/ui/widgets/pay_way_item.
 import 'package:flutter/material.dart';
 
 class PayWayListView extends StatefulWidget {
+  final void Function(String) onTap;
   const PayWayListView({
-    super.key,
+    super.key, required this.onTap,
   });
 
   @override
@@ -11,12 +12,13 @@ class PayWayListView extends StatefulWidget {
 }
 
 class _PayWayListViewState extends State<PayWayListView> {
+  final List<String> list = ['cash', 'online'];
   int isSelected = 0;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 4,
+      itemCount: list.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -24,9 +26,11 @@ class _PayWayListViewState extends State<PayWayListView> {
             setState(() {
               isSelected = index;
             });
+            widget.onTap(list[index]);
           },
           child: PayWayItem(
-            isSelected: isSelected == index ? true : false,
+            title: list[index],
+            isSelected: isSelected == index,
           ),
         );
       },

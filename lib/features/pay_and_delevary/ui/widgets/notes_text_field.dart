@@ -8,11 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theming/styles.dart';
 
 class NotesTextField extends StatelessWidget {
-  const NotesTextField({Key? key}) : super(key: key);
-
+  const NotesTextField({Key? key, required this.controller}) : super(key: key);
+final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller:controller,
       maxLines: null,
       minLines: null,
       textAlign: TextAlign.start,

@@ -1,12 +1,16 @@
 import 'package:circletraning/core/utils/dio_factory.dart';
+import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:circletraning/data/providers/city_provider.dart';
 import 'package:circletraning/data/providers/products_provider.dart';
+import 'package:circletraning/data/providers/store_order_provider.dart';
 import 'package:circletraning/data/repository/add_and_remove_favorites_repo.dart';
+import 'package:circletraning/data/repository/calculate_order_cost_repo.dart';
 import 'package:circletraning/data/repository/city_repo.dart';
 import 'package:circletraning/data/repository/fevorite_item_repo.dart';
 import 'package:circletraning/data/repository/login_repo.dart';
 import 'package:circletraning/data/repository/products_repo.dart';
 import 'package:circletraning/data/repository/slider_repo.dart';
+import 'package:circletraning/data/repository/store_order_repo.dart';
 import 'package:circletraning/data/repository/sup_category_repo.dart';
 import 'package:circletraning/data/providers/subcategory_provider.dart';
 import 'package:dio/dio.dart';
@@ -47,17 +51,11 @@ Future<void> init() async {
   getIt.registerLazySingleton<ProductProvider>(() => ProductProvider(getIt()));
   getIt.registerLazySingleton<FevoriteItemProvider>(() => FevoriteItemProvider(getIt()));
   getIt.registerLazySingleton<AddAndRemoveFavoritesProvider>(() => AddAndRemoveFavoritesProvider(getIt()));
-  getIt.registerLazySingleton<CityProvider>(
-    () => CityProvider(getIt()),
-  );
-  getIt.registerLazySingleton<LoginProvider>(() => LoginProvider(
-        loginRepo: getIt(),
-        saveUserData: getIt(),
-      ));
-  getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider(
-        registerRepo: getIt(),
-        getIt(),
-      ));
+  getIt.registerLazySingleton<CityProvider>(() => CityProvider(getIt()));
+  getIt.registerLazySingleton<LoginProvider>(() => LoginProvider(loginRepo: getIt(), saveUserData: getIt()));
+  getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider(registerRepo: getIt(), getIt()));
+  getIt.registerLazySingleton<CalculateOrderCostProvider>(() => CalculateOrderCostProvider(calculateOrderCostRepo: getIt()));
+  getIt.registerLazySingleton<StoreOrderProvider>(() => StoreOrderProvider(storeOrderRepo: getIt()));
 
   /// Repos
   getIt.registerLazySingleton<SliderRepo>(() => SliderRepo(getIt()));
@@ -70,4 +68,6 @@ Future<void> init() async {
   getIt.registerLazySingleton<CityRepo>(() => CityRepo(getIt()));
   getIt.registerLazySingleton<FevoriteItemRepo>(() => FevoriteItemRepo(getIt()));
   getIt.registerLazySingleton<AddAndRemoveFavoritesRepo>(() => AddAndRemoveFavoritesRepo(getIt()));
+  getIt.registerLazySingleton<CalculateOrderCostRepo>(() => CalculateOrderCostRepo(getIt()));
+  getIt.registerLazySingleton<StoreOrderRepo>(() => StoreOrderRepo(getIt()));
 }

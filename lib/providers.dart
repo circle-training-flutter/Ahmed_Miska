@@ -1,9 +1,11 @@
+import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:circletraning/data/providers/category_provider.dart';
 import 'package:circletraning/data/providers/fevorite_item_provider.dart';
 import 'package:circletraning/data/providers/login_provider.dart';
 import 'package:circletraning/data/providers/products_provider.dart';
 import 'package:circletraning/data/providers/register_provider.dart';
 import 'package:circletraning/data/providers/slider_image_provider.dart';
+import 'package:circletraning/data/providers/store_order_provider.dart';
 import 'package:circletraning/data/providers/subcategory_provider.dart';
 import 'package:circletraning/data/providers/last_products_provider.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,8 @@ class GenerateMultiProvider extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<RegisterProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<FevoriteItemProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<AddAndRemoveFavoritesProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<CalculateOrderCostProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<StoreOrderProvider>()),
       ],
       child: child,
     );

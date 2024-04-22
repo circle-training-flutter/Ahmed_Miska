@@ -9,9 +9,10 @@ import '../../../../core/theming/colors.dart';
 
 class PayWayItem extends StatelessWidget {
   final bool isSelected;
+  final String title;
   const PayWayItem({
     super.key,
-    required this.isSelected,
+    required this.isSelected, required this.title,
   });
 
   @override
@@ -33,7 +34,7 @@ class PayWayItem extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'cash',
+                title,
                 style: TextStyles.font14MadaRegularBlack,
               ).tr(),
               const Spacer(),
