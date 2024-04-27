@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'category.dart';
 import 'sub_category.dart';
 
-// ignore: must_be_immutable
 class ProductModelItem extends Equatable {
   final int? id;
   final String? title;

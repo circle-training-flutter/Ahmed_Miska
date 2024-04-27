@@ -8,8 +8,13 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/styles.dart';
 
 class DateRow extends StatelessWidget {
+  final DateTime date;
+  final String time;
+
   const DateRow({
     super.key,
+    required this.date,
+    required this.time,
   });
 
   @override
@@ -29,7 +34,7 @@ class DateRow extends StatelessWidget {
               ),
               horizontalSpace(8),
               Text(
-                'date',
+                date.toString().substring(0, 10),
                 style: TextStyles.font14MadaRegularBlack,
               ).tr(),
             ],
@@ -48,7 +53,7 @@ class DateRow extends StatelessWidget {
               ),
               horizontalSpace(8),
               Text(
-                'time',
+                time,
                 style: TextStyles.font14MadaRegularBlack,
               ).tr()
             ],

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'current_and_previous_buttom.dart';
 
 class RowOfTwoButtoms extends StatefulWidget {
+  final void Function(String type)? onTap;
   const RowOfTwoButtoms({
-    super.key,
+    super.key, this.onTap,
   });
 
   @override
@@ -27,6 +28,7 @@ class _RowOfTwoButtomsState extends State<RowOfTwoButtoms> {
                 checkSecond = false;
               });
             }
+            widget.onTap!('new');
           },
           child: CurrentAndPreviosButtom(
             title: 'current',
@@ -42,6 +44,7 @@ class _RowOfTwoButtomsState extends State<RowOfTwoButtoms> {
                 checkSecond = true;
               });
             }
+            widget.onTap!('old');
           },
           child: CurrentAndPreviosButtom(
             title: 'previous',

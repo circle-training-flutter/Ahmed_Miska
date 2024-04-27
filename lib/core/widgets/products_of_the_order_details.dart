@@ -1,4 +1,5 @@
 import 'package:circletraning/core/theming/styles.dart';
+import 'package:circletraning/data/models/response/product_model/product_datum.dart';
 import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,15 @@ import 'dashed_divider.dart';
 import '../../features/details_order/ui/widgets/listview_od_products_in_product_screen.dart';
 
 class ProductsOfTheOrderDetails extends StatefulWidget {
+  final num totalPrice;
+  final List<ProductModelItem> productItems;
   final bool usePoints;
   final Function(bool) onTab;
   const ProductsOfTheOrderDetails({
     super.key,
     required this.usePoints,
     required this.onTab,
+    required this.productItems, required this.totalPrice,
   });
 
   @override
@@ -45,7 +49,7 @@ class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
               style: TextStyles.font12MadaRegularGray,
             ).tr(),
             verticalSpace(12),
-            const ListViewOfProductsInProductDetails(),
+            ListViewOfProductsInProductDetails(productItems: widget.productItems),
             verticalSpace(12),
             MySeparator(color: ColorManger.gray.withOpacity(.3)),
             verticalSpace(12),
@@ -64,8 +68,8 @@ class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
                     },
                   )
                 : horizontalSpace(1),
-            TotalPriceRow(
-              usePoints: useboint,
+            TotalPriceRow(totalPrice: widget.totalPrice,
+             
             )
           ],
         ),
@@ -75,10 +79,11 @@ class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
 }
 
 class TotalPriceRow extends StatelessWidget {
-  final bool usePoints;
+  final num totalPrice;
+
   const TotalPriceRow({
     super.key,
-    required this.usePoints,
+    required this.totalPrice,
   });
 
   @override
@@ -92,11 +97,7 @@ class TotalPriceRow extends StatelessWidget {
         const Spacer(),
         Consumer<SharedPref>(builder: (context, sharedPref, child) {
           return Text(
-            usePoints
-                ? (Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.grandTotal!.toDouble() +
-                        Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.points!)
-                    .toString()
-                : Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.grandTotal.toString(),
+            totalPrice.toString(),
             style: TextStyles.font18MadaSemiBoldBlack.copyWith(color: ColorManger.red),
           ).tr();
         }),

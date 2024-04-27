@@ -42,4 +42,11 @@ class FevoriteItemProvider with ChangeNotifier {
     notifyListeners();
     return apiResponse;
   }
+    void updateFavoriteStatus(int productId, bool isFavorite) {
+    int index = fevoriteproductModelList.indexWhere((product) => product.id == productId);
+    if (index != -1) {
+      fevoriteproductModelList[index].isFavorite = isFavorite;
+      notifyListeners();
+    }
+  }
 }

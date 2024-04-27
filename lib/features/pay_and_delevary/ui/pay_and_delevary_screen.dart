@@ -2,7 +2,6 @@ import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
 import 'package:circletraning/data/models/body/calculate_order_cost_request_model.dart';
 import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
-import 'package:circletraning/data/providers/shared_prefrance_provider.dart';
 import 'package:circletraning/features/pay_and_delevary/ui/widgets/container_of_pay_and_delevary.dart';
 import 'package:circletraning/features/pay_and_delevary/ui/widgets/listview_of_items_in_pay_and_delevary_screen.dart';
 import 'package:circletraning/features/pay_and_delevary/ui/widgets/notes_text_field.dart';
@@ -25,17 +24,17 @@ class PayAndDelevaryScreen extends StatefulWidget {
 }
 
 class _PayAndDelevaryScreenState extends State<PayAndDelevaryScreen> {
-  @override
-  void initState() {
-    Provider.of<CalculateOrderCostProvider>(context, listen: false).details.clear();
-    for (int i = 0; i < Provider.of<SharedPref>(context, listen: false).cartItems.length; i++) {
-      int id = Provider.of<SharedPref>(context, listen: false).cartItems[i].id!;
-      int quantity = Provider.of<SharedPref>(context, listen: false).cartItems[i].weightUnit!;
-      Provider.of<CalculateOrderCostProvider>(context, listen: false).details.add(Detail(productId: id, qty: quantity, netCost: 0));
-    }
+  // @override
+  // void initState() {
+  //   Provider.of<CalculateOrderCostProvider>(context, listen: false).details.clear();
+  //   for (int i = 0; i < Provider.of<SharedPref>(context, listen: false).cartItems.length; i++) {
+  //     int id = Provider.of<SharedPref>(context, listen: false).cartItems[i].id!;
+  //     int quantity = Provider.of<SharedPref>(context, listen: false).cartItems[i].weightUnit!;
+  //     Provider.of<CalculateOrderCostProvider>(context, listen: false).details.add(Detail(productId: id, qty: quantity, netCost: 0));
+  //   }
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   String title = 'cash';
 
@@ -89,10 +88,16 @@ class _PayAndDelevaryScreenState extends State<PayAndDelevaryScreen> {
                 ),
                 TotalPrice(
                   price: widget.price,
-                  buttom: Text(
-                    'confirm',
-                    style: TextStyles.font14MadaRegularWith,
-                  ).tr(),
+                  buttom: provider.isLoading
+                      ? SizedBox(
+                          height: 20.h,
+                          width: 20.w,
+                          child: const CircularProgressIndicator(),
+                        )
+                      : Text(
+                          'confirm',
+                          style: TextStyles.font14MadaRegularWith,
+                        ).tr(),
                   onTap: () async {
                     await provider.calculateOrderCost(
                       OrderCostRequestModel(

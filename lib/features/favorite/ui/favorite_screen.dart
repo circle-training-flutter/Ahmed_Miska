@@ -37,7 +37,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ddd = Provider.of<LastProductsProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -45,7 +44,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             AppBarOfReturnedScreens(
               title: 'favorite',
               onTap: () {
-                ddd.getProducts();
                 pop();
               },
             ),

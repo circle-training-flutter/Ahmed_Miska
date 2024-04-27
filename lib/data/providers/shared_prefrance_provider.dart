@@ -64,8 +64,7 @@ class SharedPref with ChangeNotifier {
     notifyListeners();
   }
 
-  void addToCart(ProductModelItem product, BuildContext context,
-      {bool fromHome = false}) async {
+  void addToCart(ProductModelItem product, BuildContext context, {bool fromHome = false}) async {
     await loadCartItems();
     bool check = false;
     for (var item in cartItems) {
@@ -95,5 +94,11 @@ class SharedPref with ChangeNotifier {
   void removeFromCart(ProductModelItem product) {
     cartItems.remove(product);
     saveCartItems();
+  }
+
+  void clearCart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cartItems');
+    notifyListeners();
   }
 }

@@ -89,6 +89,7 @@ class _ProductGridviewItemState extends State<ProductGridviewItem> {
                             );
                             widget.productModel.isFavorite = widget.productModel.isFavorite;
                             Provider.of<LastProductsProvider>(context, listen: false).updateFavoriteStatus(widget.productModel.id!, widget.productModel.isFavorite!);
+                           
                           },
                           checked: widget.productModel.isFavorite,
                         )

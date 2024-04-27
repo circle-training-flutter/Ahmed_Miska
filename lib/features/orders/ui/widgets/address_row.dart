@@ -9,8 +9,9 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
 class AddressRow extends StatelessWidget {
+  final String address;
   const AddressRow({
-    super.key,
+    super.key, required this.address,
   });
 
   @override
@@ -25,7 +26,7 @@ class AddressRow extends StatelessWidget {
         ),
         horizontalSpace(8),
         Text(
-          'address',
+          address,
           style: TextStyles.font14MadaRegularBlack,
         ).tr()
       ],

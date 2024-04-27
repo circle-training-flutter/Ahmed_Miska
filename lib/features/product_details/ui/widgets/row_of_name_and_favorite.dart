@@ -1,6 +1,8 @@
 import 'package:circletraning/data/models/response/product_model/product_datum.dart';
 import 'package:circletraning/data/providers/add_and_remove_favorite_provider.dart';
+import 'package:circletraning/data/providers/fevorite_item_provider.dart';
 import 'package:circletraning/data/providers/last_products_provider.dart';
+import 'package:circletraning/data/providers/products_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,6 +47,8 @@ class _RowOfNameAndfavoriteState extends State<RowOfNameAndfavorite> {
             });
             Provider.of<AddAndRemoveFavoritesProvider>(context, listen: false).addAndRemoveFavorite(widget.product.id!);
             Provider.of<LastProductsProvider>(context, listen: false).updateFavoriteStatus(widget.product.id!, widget.product.isFavorite!);
+            Provider.of<ProductProvider>(context, listen: false).updateFavoriteStatus(widget.product.id!, widget.product.isFavorite!);
+            Provider.of<FevoriteItemProvider>(context, listen: false).updateFavoriteStatus(widget.product.id!, widget.product.isFavorite!);
           },
         ),
       ],

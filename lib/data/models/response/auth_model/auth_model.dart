@@ -65,7 +65,7 @@ class UserData {
   String? phoneCode;
   String? phone;
   String? image;
-  int? points;
+  num? points;
   String? invitationCode;
   int? cityId;
   City? city;
@@ -113,7 +113,7 @@ class UserData {
 class City {
   int? id;
   String? title;
-  int? deliveryCost;
+  num? deliveryCost;
   int? regionId;
 
   City({

@@ -1,4 +1,5 @@
 import 'package:circletraning/core/helpers/spacing.dart';
+import 'package:circletraning/data/models/response/my_orders/my_orders_model.dart';
 import 'package:circletraning/features/details_order/ui/widgets/note_of_the_order.dart';
 import 'package:circletraning/core/widgets/products_of_the_order_details.dart';
 import 'package:circletraning/features/details_order/ui/widgets/slider_and_track_order.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsOrderScreen extends StatelessWidget {
-  const DetailsOrderScreen({Key? key}) : super(key: key);
+  final MyOrdersData myOrdersData;
+  const DetailsOrderScreen({Key? key, required this.myOrdersData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,19 @@ class DetailsOrderScreen extends StatelessWidget {
                       child: const SliderAndTrackOrder(),
                     ),
                     verticalSpace(24),
-                    const NotesOfTheOrder(
+                    NotesOfTheOrder(
                       check: true,
+                      id: myOrdersData.id!,
+                      address: myOrdersData.address!,
+                      payType: myOrdersData.payType!,
+                      note: myOrdersData.notes,
                     ),
                     verticalSpace(12),
-                     ProductsOfTheOrderDetails(
-                      // ignore: avoid_types_as_parameter_names
-                      usePoints: false, onTab: (bool ) {  },
+                    ProductsOfTheOrderDetails(
+                      totalPrice: myOrdersData.grandTotal!,
+                      usePoints: false,
+                      onTab: (bool) {},
+                      productItems: myOrdersData.details!.map((e) => e.product!).toList(),
                     )
                   ],
                 ),

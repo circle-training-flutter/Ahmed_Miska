@@ -6,8 +6,9 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
 class AddressIdRow extends StatelessWidget {
+  final int id;
   const AddressIdRow({
-    super.key,
+    super.key, required this.id,
   });
 
   @override
@@ -17,9 +18,8 @@ class AddressIdRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 5.h),
           child: Text(
-            '#26585',
-            style: TextStyles.font18MadaSemiBoldBlack
-                .copyWith(color: ColorManger.red),
+            '#$id',
+            style: TextStyles.font18MadaSemiBoldBlack.copyWith(color: ColorManger.red),
           ).tr(),
         ),
         const Spacer(),
@@ -27,8 +27,7 @@ class AddressIdRow extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
           child: Text(
             'details',
-            style: TextStyles.font14MadaRegularBlack
-                .copyWith(color: ColorManger.red),
+            style: TextStyles.font14MadaRegularBlack.copyWith(color: ColorManger.red),
           ).tr(),
         )
       ],

@@ -8,7 +8,6 @@ import 'features/splash/splash_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

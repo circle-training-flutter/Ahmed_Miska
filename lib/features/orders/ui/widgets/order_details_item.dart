@@ -1,4 +1,5 @@
 import 'package:circletraning/core/helpers/extentions.dart';
+import 'package:circletraning/data/models/response/my_orders/my_orders_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,16 +14,18 @@ import 'date_row.dart';
 
 class OrderDetailsItem extends StatelessWidget {
   final bool isexpierd;
+  final MyOrdersData myOrdersData;
   const OrderDetailsItem({
     super.key,
     required this.isexpierd,
+    required this.myOrdersData,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        push(const DetailsOrderScreen());
+        push(DetailsOrderScreen(myOrdersData: myOrdersData));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -39,24 +42,20 @@ class OrderDetailsItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       verticalSpace(16),
-                      const AddressIdRow(),
+                      AddressIdRow(id: myOrdersData.id!),
                       verticalSpace(16),
-                      const DateRow(),
+                      DateRow(date: myOrdersData.date!, time: myOrdersData.time!),
                       verticalSpace(16),
-                      const AddressRow(),
+                      AddressRow(address: myOrdersData.address!),
                       verticalSpace(16),
                       Container(
                         height: 41.h,
                         width: 110.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.r),
-                            color: ColorManger.white,
-                            border: Border.all(color: const Color(0xffE4D9C4))),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.r), color: ColorManger.white, border: Border.all(color: const Color(0xffE4D9C4))),
                         child: Center(
                           child: Text(
                             'expierd',
-                            style: TextStyles.font14MadaRegularBlack
-                                .copyWith(color: ColorManger.red),
+                            style: TextStyles.font14MadaRegularBlack.copyWith(color: ColorManger.red),
                           ).tr(),
                         ),
                       ),
@@ -66,11 +65,11 @@ class OrderDetailsItem extends StatelessWidget {
                 : Column(
                     children: [
                       verticalSpace(16),
-                      const AddressIdRow(),
+                      AddressIdRow(id: myOrdersData.id!),
                       verticalSpace(16),
-                      const DateRow(),
+                      DateRow(date: myOrdersData.date!, time: myOrdersData.time!),
                       verticalSpace(16),
-                      const AddressRow(),
+                      AddressRow(address: myOrdersData.address!),
                       verticalSpace(16),
                     ],
                   ),

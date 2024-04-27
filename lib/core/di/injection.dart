@@ -1,6 +1,7 @@
 import 'package:circletraning/core/utils/dio_factory.dart';
 import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:circletraning/data/providers/city_provider.dart';
+import 'package:circletraning/data/providers/my_orders_provider.dart';
 import 'package:circletraning/data/providers/products_provider.dart';
 import 'package:circletraning/data/providers/store_order_provider.dart';
 import 'package:circletraning/data/repository/add_and_remove_favorites_repo.dart';
@@ -8,6 +9,7 @@ import 'package:circletraning/data/repository/calculate_order_cost_repo.dart';
 import 'package:circletraning/data/repository/city_repo.dart';
 import 'package:circletraning/data/repository/fevorite_item_repo.dart';
 import 'package:circletraning/data/repository/login_repo.dart';
+import 'package:circletraning/data/repository/my_orders_repo.dart';
 import 'package:circletraning/data/repository/products_repo.dart';
 import 'package:circletraning/data/repository/slider_repo.dart';
 import 'package:circletraning/data/repository/store_order_repo.dart';
@@ -56,6 +58,7 @@ Future<void> init() async {
   getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider(registerRepo: getIt(), getIt()));
   getIt.registerLazySingleton<CalculateOrderCostProvider>(() => CalculateOrderCostProvider(calculateOrderCostRepo: getIt()));
   getIt.registerLazySingleton<StoreOrderProvider>(() => StoreOrderProvider(storeOrderRepo: getIt()));
+  getIt.registerLazySingleton<MyOrdersProvider>(() => MyOrdersProvider(myOrdersRepo: getIt()));
 
   /// Repos
   getIt.registerLazySingleton<SliderRepo>(() => SliderRepo(getIt()));
@@ -70,4 +73,5 @@ Future<void> init() async {
   getIt.registerLazySingleton<AddAndRemoveFavoritesRepo>(() => AddAndRemoveFavoritesRepo(getIt()));
   getIt.registerLazySingleton<CalculateOrderCostRepo>(() => CalculateOrderCostRepo(getIt()));
   getIt.registerLazySingleton<StoreOrderRepo>(() => StoreOrderRepo(getIt()));
+  getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt()));
 }

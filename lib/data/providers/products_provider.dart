@@ -45,4 +45,12 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
     return apiResponse;
   }
+
+  void updateFavoriteStatus(int productId, bool isFavorite) {
+    int index = productModelList.indexWhere((product) => product.id == productId);
+    if (index != -1) {
+      productModelList[index].isFavorite = isFavorite;
+      notifyListeners();
+    }
+  }
 }

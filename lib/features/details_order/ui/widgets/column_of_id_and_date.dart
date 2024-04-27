@@ -8,8 +8,13 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/svg_icon.dart';
 
 class ColumnOfIdAndDateOfTheNotesOfOrder extends StatelessWidget {
+  final DateTime date;
+  final String time;
+  final int id;
   const ColumnOfIdAndDateOfTheNotesOfOrder({
     super.key,
+    required this.date,
+    required this.time, required this.id,
   });
 
   @override
@@ -21,7 +26,7 @@ class ColumnOfIdAndDateOfTheNotesOfOrder extends StatelessWidget {
             SVGIcon(AppIcons.idIcon),
             horizontalSpace(8),
             Text(
-              'num',
+              '#$id',
               style: TextStyles.font18MadaSemiBoldBlack.copyWith(
                 color: ColorManger.red,
               ),
@@ -36,7 +41,7 @@ class ColumnOfIdAndDateOfTheNotesOfOrder extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'date',
+                  date.toString().substring(0, 10),
                   style: TextStyles.font14MadaRegularBlack,
                 ).tr(),
                 horizontalSpace(8),
@@ -46,7 +51,7 @@ class ColumnOfIdAndDateOfTheNotesOfOrder extends StatelessWidget {
                 ),
                 horizontalSpace(8),
                 Text(
-                  'time',
+                  time,
                   style: TextStyles.font14MadaRegularBlack,
                 ).tr(),
               ],
