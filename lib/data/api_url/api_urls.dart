@@ -13,4 +13,7 @@ class AppURL {
   static const String calculateOrderCost = 'user/orders/calculateOrderCost';
   static const String storeOrder = 'user/orders';
   static const String myOrders = 'user/orders';
+  static const String myPoints = 'user/profile/pointsHistory';
+  static const String updateProfile = 'user/profile/updateProfile';
+  static const String contactUs = 'contact-us';
 }

@@ -40,8 +40,10 @@ class DetailsOrderScreen extends StatelessWidget {
                     ),
                     verticalSpace(12),
                     ProductsOfTheOrderDetails(
+                    deliveryPrice: myOrdersData.deliveryPrice!,
                       totalPrice: myOrdersData.grandTotal!,
                       usePoints: false,
+                      // ignore: avoid_types_as_parameter_names
                       onTab: (bool) {},
                       productItems: myOrdersData.details!.map((e) => e.product!).toList(),
                     )

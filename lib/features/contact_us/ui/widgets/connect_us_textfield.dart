@@ -10,26 +10,37 @@ class ConnectUsTextField extends StatelessWidget {
   final String icon;
   final int? maxLines;
   final int? minLines;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final Key formKey;
   const ConnectUsTextField({
     super.key,
     required this.title,
     required this.icon,
     this.maxLines,
     this.minLines,
+    required this.controller,
+    required this.formKey,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: TextStyles.font14MadaRegularBlack,
-      minLines: minLines ?? 1,
-      maxLines: maxLines ?? 1,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        icon: SVGIcon(icon),
-        hintText: tr(title),
-        hintStyle: TextStyles.font14MadaRegularBlack.copyWith(
-          color: ColorManger.gray,
+    return Form(
+      key: formKey,
+      child: TextFormField(
+        controller: controller,
+        validator: validator,
+        style: TextStyles.font14MadaRegularBlack,
+        minLines: minLines ?? 1,
+        maxLines: maxLines ?? 1,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          icon: SVGIcon(icon),
+          hintText: tr(title),
+          hintStyle: TextStyles.font14MadaRegularBlack.copyWith(
+            color: ColorManger.gray,
+          ),
         ),
       ),
     );

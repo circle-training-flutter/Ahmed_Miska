@@ -7,11 +7,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class MyOrdersProvider extends ChangeNotifier {
   final List<MyOrdersData> myOrdersModelList = [];
-  late final ServerFailure productfailure;
+  ServerFailure productfailure;
   final MyOrdersRepo myOrdersRepo;
   MyOrdersModel? myOrdersModel;
 
-  MyOrdersProvider({required this.myOrdersRepo});
+  MyOrdersProvider({required this.productfailure, required this.myOrdersRepo});
 
   bool isLoading = false;
   bool isFailure = false;

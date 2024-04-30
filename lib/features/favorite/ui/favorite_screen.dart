@@ -1,7 +1,6 @@
 import 'package:circletraning/core/helpers/extentions.dart';
 import 'package:circletraning/core/widgets/custom_error_widget.dart';
 import 'package:circletraning/data/providers/fevorite_item_provider.dart';
-import 'package:circletraning/data/providers/last_products_provider.dart';
 import 'package:circletraning/features/product/ui/widgets/row_of_prouducts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

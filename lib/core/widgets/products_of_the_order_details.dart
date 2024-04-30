@@ -1,6 +1,5 @@
 import 'package:circletraning/core/theming/styles.dart';
 import 'package:circletraning/data/models/response/product_model/product_datum.dart';
-import 'package:circletraning/data/providers/calculate_order_cost_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +13,7 @@ import '../../features/details_order/ui/widgets/listview_od_products_in_product_
 
 class ProductsOfTheOrderDetails extends StatefulWidget {
   final num totalPrice;
+  final num deliveryPrice;
   final List<ProductModelItem> productItems;
   final bool usePoints;
   final Function(bool) onTab;
@@ -21,7 +21,8 @@ class ProductsOfTheOrderDetails extends StatefulWidget {
     super.key,
     required this.usePoints,
     required this.onTab,
-    required this.productItems, required this.totalPrice,
+    required this.productItems,
+    required this.totalPrice, required this.deliveryPrice,
   });
 
   @override
@@ -53,7 +54,9 @@ class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
             verticalSpace(12),
             MySeparator(color: ColorManger.gray.withOpacity(.3)),
             verticalSpace(12),
-            const OrderRow(),
+            OrderRow(
+              deliveryPrice: widget.deliveryPrice,
+            ),
             verticalSpace(12),
             MySeparator(color: ColorManger.gray.withOpacity(.3)),
             verticalSpace(12),
@@ -68,8 +71,8 @@ class _ProductsOfTheOrderDetailsState extends State<ProductsOfTheOrderDetails> {
                     },
                   )
                 : horizontalSpace(1),
-            TotalPriceRow(totalPrice: widget.totalPrice,
-             
+            TotalPriceRow(
+              totalPrice: widget.totalPrice,
             )
           ],
         ),
@@ -112,8 +115,10 @@ class TotalPriceRow extends StatelessWidget {
 }
 
 class OrderRow extends StatelessWidget {
+  final num deliveryPrice;
   const OrderRow({
     super.key,
+    required this.deliveryPrice,
   });
 
   @override
@@ -126,7 +131,7 @@ class OrderRow extends StatelessWidget {
         ).tr(),
         const Spacer(),
         Text(
-          Provider.of<CalculateOrderCostProvider>(context, listen: false).orderCostModel!.data!.deliveryPrice.toString(),
+          deliveryPrice.toString(),
           style: TextStyles.font16MadaSemiBoldBlack,
         ).tr(),
         horizontalSpace(4),

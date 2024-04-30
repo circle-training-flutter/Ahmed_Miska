@@ -1,5 +1,4 @@
-import 'package:circletraning/core/widgets/custom_error_widget.dart';
-import 'package:circletraning/core/widgets/loading_widget.dart';
+import 'package:circletraning/core/utils/screen_state_layout.dart';
 import 'package:circletraning/data/providers/my_orders_provider.dart';
 import 'package:circletraning/features/product/ui/widgets/row_of_prouducts.dart';
 import 'package:flutter/material.dart';
@@ -47,17 +46,24 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   }),
                   verticalSpace(12),
                   Expanded(
-                    child: provider.isFailure
-                        ? CustomErrorWidget(errMessage: provider.productfailure.errMessage)
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: provider.isLoading ? 1 : provider.myOrdersModelList.length,
-                            itemBuilder: (_, index) {
-                              return provider.isLoading
-                                  ? LoadingWidget(height: 120.h, width: double.infinity)
-                                  : OrderDetailsItem(isexpierd: provider.myOrdersModelList[index].status == 'canceled', myOrdersData: provider.myOrdersModelList[index]);
-                            },
-                          ),
+                    child: ScreenStateLayout(
+                      isError: provider.isFailure,
+                      isLoading: provider.isLoading,
+                      isEmpty: provider.myOrdersModelList.isEmpty,
+                      error: provider.productfailure.errMessage,
+                      builder: (BuildContext context) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: provider.myOrdersModelList.length,
+                          itemBuilder: (_, index) {
+                            return OrderDetailsItem(
+                              isexpierd: provider.myOrdersModelList[index].status == 'canceled',
+                              myOrdersData: provider.myOrdersModelList[index],
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               );

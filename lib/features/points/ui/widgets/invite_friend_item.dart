@@ -8,8 +8,13 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
 class InviteFriendItem extends StatelessWidget {
+  final String fname, lname;
+  final num number;
   const InviteFriendItem({
     super.key,
+    required this.fname,
+    required this.number,
+    required this.lname,
   });
 
   @override
@@ -29,16 +34,15 @@ class InviteFriendItem extends StatelessWidget {
             ).tr(),
             verticalSpace(4),
             Text(
-              'name',
+              '$fname  $lname',
               style: TextStyles.font14MadaRegularBlack,
             ).tr()
           ],
         ),
         const Spacer(),
         Text(
-          "+ 10",
-          style: TextStyles.font18MadaSemiBoldBlack
-              .copyWith(color: ColorManger.red),
+          "+ $number",
+          style: TextStyles.font18MadaSemiBoldBlack.copyWith(color: ColorManger.red),
         )
       ],
     );

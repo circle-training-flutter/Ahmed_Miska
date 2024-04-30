@@ -9,8 +9,9 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
 class MyPointsContianer extends StatelessWidget {
+  final num points;
   const MyPointsContianer({
-    super.key,
+    super.key, required this.points,
   });
 
   @override
@@ -37,13 +38,12 @@ class MyPointsContianer extends StatelessWidget {
               horizontalSpace(8),
               Text(
                 'my_points',
-                style: TextStyles.font16MadaSemiBoldBlack
-                    .copyWith(color: ColorManger.gray),
+                style: TextStyles.font16MadaSemiBoldBlack.copyWith(color: ColorManger.gray),
               ).tr()
             ],
           ),
           Text(
-            '130',
+           points.toString() ,
             style: TextStyles.font18MadaSemiBoldBlack.copyWith(fontSize: 60.sp),
           ),
         ],

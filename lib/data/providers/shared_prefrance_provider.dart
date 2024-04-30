@@ -97,8 +97,8 @@ class SharedPref with ChangeNotifier {
   }
 
   void clearCart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('cartItems');
+    cartItems.clear();
+    saveCartItems();
     notifyListeners();
   }
 }

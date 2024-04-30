@@ -2,9 +2,6 @@ import 'package:circletraning/data/models/response/product_model/product_datum.d
 import 'package:circletraning/features/details_order/ui/widgets/row_of_product_in_product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-
-import '../../../../data/providers/shared_prefrance_provider.dart';
 
 class ListViewOfProductsInProductDetails extends StatelessWidget {
   final List<ProductModelItem> productItems;

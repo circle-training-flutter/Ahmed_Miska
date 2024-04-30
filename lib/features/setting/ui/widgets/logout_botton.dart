@@ -1,12 +1,9 @@
 import 'package:circletraning/core/helpers/extentions.dart';
 import 'package:circletraning/core/widgets/svg_icon.dart';
-import 'package:circletraning/data/providers/last_products_provider.dart';
 import 'package:circletraning/features/main_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-
 import '../../../../core/helpers/consatants.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
@@ -27,7 +24,7 @@ class LogOutAndLoginButton extends StatelessWidget {
         // ignore: unnecessary_null_comparison
         if (saveUserData.getUserToken() != '') {
           saveUserData.clearSharedData();
-          Provider.of<LastProductsProvider>(context, listen: false).getProducts();
+
           push(const MainScreen());
         } else {
           push(const SigninScreen());

@@ -2,12 +2,15 @@ import 'dart:io';
 import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/theming/styles.dart';
 import 'package:circletraning/core/widgets/custom_red_buttom.dart';
+import 'package:circletraning/data/models/body/update_profile_request_mpdel.dart';
 import 'package:circletraning/data/providers/register_provider.dart';
+import 'package:circletraning/data/providers/update_profile_provider.dart';
 import 'package:circletraning/features/create_and_edit_account/ui/widgets/choose_city_drop_down.dart';
 import 'package:circletraning/features/create_and_edit_account/ui/widgets/invited_by_user.dart';
 import 'package:circletraning/features/create_and_edit_account/ui/widgets/name_text_field.dart';
 import 'package:circletraning/features/create_and_edit_account/ui/widgets/select_photo.dart';
 import 'package:circletraning/features/sign_in/ui/widgets/phone_input_field.dart';
+import 'package:circletraning/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,6 +36,10 @@ class _CreateAndEditAccountState extends State<CreateAndEditAccount> {
     return Scaffold(
       body: SafeArea(
         child: Consumer<RegisterProvider>(builder: (context, provider, child) {
+          if (!widget.iscreate) {
+            provider.firstNameController.text = saveUserData.getUserData()!.firstName!;
+            provider.lastNameController.text = saveUserData.getUserData()!.lastName!;
+          }
           return Column(
             children: [
               AppBarOfReturnedScreens(title: widget.iscreate ? 'create_account' : 'edit_account'),
@@ -79,19 +86,21 @@ class _CreateAndEditAccountState extends State<CreateAndEditAccount> {
                           ],
                         ),
                         verticalSpace(32),
-                        CustomInputTextField(
-                          readOnly: true,
-                          controller: provider.phoneController,
-                          formKey: provider.phoneFormKey,
-                          hitText: 'phone_number',
-                          prefixIcon: AppIcons.phoneIcon,
-                          validator: (p0) {
-                            if (p0 == null || p0.isEmpty || p0.length < 10 || p0.length > 11) {
-                              return 'invalid_phone_number'.tr();
-                            }
-                            return null;
-                          },
-                        ),
+                        !widget.iscreate
+                            ? const SizedBox()
+                            : CustomInputTextField(
+                                readOnly: true,
+                                controller: provider.phoneController,
+                                formKey: provider.phoneFormKey,
+                                hitText: 'phone_number',
+                                prefixIcon: AppIcons.phoneIcon,
+                                validator: (p0) {
+                                  if (p0 == null || p0.isEmpty || p0.length < 10 || p0.length > 11) {
+                                    return 'invalid_phone_number'.tr();
+                                  }
+                                  return null;
+                                },
+                              ),
                         widget.iscreate
                             ? Column(
                                 children: [
@@ -118,28 +127,40 @@ class _CreateAndEditAccountState extends State<CreateAndEditAccount> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
                 child: CustomRedButtom(
                   onTap: () async {
-                    if (provider.firstNameFormKey.currentState!.validate() &&
-                        provider.lastNameFormKey.currentState!.validate() &&
-                        provider.phoneFormKey.currentState!.validate() &&
-                        provider.cityFromKey.currentState!.validate()) {
-                      provider.regiter(
-                        RegisterRequestBody(
-                          invitationCode: provider.inviteCodeController.text,
+                    if (!widget.iscreate) {
+                      Provider.of<UpdateProfileProvider>(context, listen: false).updateProfile(
+                        UpdateProfileRequestModel(
                           firstName: provider.firstNameController.text,
                           lastName: provider.lastNameController.text,
-                          phone: provider.phoneController.text.length == 11 ? provider.phoneController.text.substring(1) : provider.phoneController.text,
-                          cityId: provider.cityId!,
-                          image: _image,
+                          _image,
                         ),
                       );
+                    } else {
+                      if (provider.firstNameFormKey.currentState!.validate() &&
+                          provider.lastNameFormKey.currentState!.validate() &&
+                          provider.phoneFormKey.currentState!.validate() &&
+                          provider.cityFromKey.currentState!.validate()) {
+                        provider.regiter(
+                          RegisterRequestBody(
+                            invitationCode: provider.inviteCodeController.text,
+                            firstName: provider.firstNameController.text,
+                            lastName: provider.lastNameController.text,
+                            phone: provider.phoneController.text.length == 11 ? provider.phoneController.text.substring(1) : provider.phoneController.text,
+                            cityId: provider.cityId!,
+                            image: _image,
+                          ),
+                        );
+                      }
                     }
                   },
                   width: double.infinity,
                   child: Center(
-                    child: Text(
-                      'confirm',
-                      style: TextStyles.font14MadaRegularWith,
-                    ).tr(),
+                    child: provider.isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            'confirm',
+                            style: TextStyles.font14MadaRegularWith,
+                          ).tr(),
                   ),
                 ),
               ),

@@ -49,8 +49,10 @@ class _BillScreenState extends State<BillScreen> {
                         ),
                         verticalSpace(12),
                         ProductsOfTheOrderDetails(
+                          deliveryPrice: calc.orderCostModel!.data!.deliveryPrice!.toDouble(),
                           totalPrice: calc.orderCostModel!.data!.grandTotal!.toDouble(),
                           usePoints: true,
+                          // ignore: avoid_types_as_parameter_names
                           onTab: (bool) {
                             setState(() {
                               usepoint = bool;
