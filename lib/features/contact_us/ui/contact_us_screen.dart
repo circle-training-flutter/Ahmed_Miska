@@ -1,5 +1,6 @@
 import 'package:circletraning/core/helpers/consatants.dart';
 import 'package:circletraning/core/helpers/spacing.dart';
+import 'package:circletraning/core/helpers/validaitor.dart';
 import 'package:circletraning/core/theming/colors.dart';
 import 'package:circletraning/core/theming/styles.dart';
 import 'package:circletraning/core/widgets/custom_red_buttom.dart';
@@ -61,6 +62,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           icon: AppIcons.emailIcon,
                           controller: provider.emailController,
                           formKey: provider.emailFormKey,
+                          validator: (value) {
+                            if (!isEmail(value!)) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
                         ),
                         const Divider(color: ColorManger.grayLight),
                         ConnectUsTextField(
